@@ -33,7 +33,7 @@ Dichos factores se pueden englobar en 4 aspectos demográficos, que son:
 ## Fuentes de información y segmentación de variables
 Para el presente trabajo se tomó la base de datos correspondiente a la encuesta nacional de calidad de vida 2018-2019, proporcionada por el Departamento Administrativo Nacional de Estadística (DANE) por medio del archivo nacional de datos (ANDA) . De allí, se usaron 9 tablas, que corresponden a: Datos de la vivienda , servicios del hogar, características y composición del hogar, salud, educación, fuerza de trabajo, condiciones de vida del hogar y tenencia de bienes, y uso energético del hogar.
 
-De las más de 150 variables contenidas en el total de datos, se hizo una escogencia de las más relevantes y se obtuvo una tabla final con 48 variables significativas, para así realizar una elección más detallada de las mismas. Todo lo anterior se hizo con el fin de construir un análisis para la posterior escogencia de un buen modelo predictivo, que tendrá como finalidad predecir la cantidad de hijos según las características del hogar. 
+De las más de 150 variables contenidas en el total de datos, se hizo una primera elección teniendo encuenta las variables más relevantes que estuvieran bien categorizadas y que no tuvieran un registro de frases y/o letras y a su vez, que no existiera una gran cantidad de datos vacios para evitar una reducción drástica de la base de datos. Finalmente, se obtuvo una tabla final con $48$ variables, que se procedieron a ser analizadas estadísticamente para llevar a cabo una segunda selección. 
 
 ## Descripción de variables
 - ***DIRECTORIO:*** número utilizado para identificar cada uno de los hogares.

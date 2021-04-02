@@ -1,0 +1,360 @@
+---
+title: "MODELO DE PREDICCIÓN DEL NÚMERO DE HIJOS EN LOS HOGARES COLOMBIANOS"
+author:
+- Carlos Mario Calle González
+- Catherine Andrea Córdoba Espinosa
+- Allison Piedrahita García
+- Santiago Ramírez Zapata
+- Jhonier Santiago Serna Cardona
+date: "01/06/2021"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+## Introducción
+Gran parte de las políticas públicas de un país se formulan teniendo en cuenta el número de habitantes de su territorio [1], por ello, conocer el comportamiento de la natalidad se convierte en un factor clave para las instituciones gubernamentales. Teniendo en cuenta lo anterior, se decide desarrollar un modelo de predicción el cual determine la cantidad de hijos que tendría un hogar de acuerdo a las dinámicas y características propias de dicha unidad de estudio.A continuación, se expondrá de manera detallada y secuencial, los pasos seguidos para el desarrollo del modelo obejtivo.
+
+## Alcance
+El planteamiento del modelo de predicción se desarrollará para los hogares colombianos, debido a que se cuenta con la información suficiente para realizar un modelo sólido que proporcione resultados similares a los reales. 
+
+## Público objetivo
+La utilidad del modelo de predicción se encuentra mayormente en el desarrollo de políticas públicas del país, con el fin de establecer medidas de bienestar en cada uno de los hogares, refiriéndose al goce de los derechos de la familia y de cada uno de sus integrantes [1]. Por lo anterior, la creación del modelo de predicción y su posterior aplicación se encuentra dirigida específicamente a entidades gubernamentales, para que dichas instituciones puedan sacar provecho de los resultados obtenidos.
+
+## Estado del arte en Colombia
+Según estudios realizados por el Departamento Administrativo Nacional de Estadística (DANE), con el fin de comprender la estructura y la dinámica de las familias e identificar los problemas a los que se enfrentan; en los cuales se hace un análisis de la composición y cambios en la familia Colombiana identificando los factores asociados a los principales cambios [2]. Se plantea que la estructura familiar depende de muchas variables sociales, tales como la edad, sexo, el estado conyugal, el nivel educativo de los jefes, entre otros.
+Dichos factores se pueden englobar en 4 aspectos demográficos, que son:
+
+- **Culturales:** Según la región, creencias religiosas, importancia de las relaciones en pareja, entre otras
+- **Socioeconómicos:** Zonas urbanas, costo de la vivienda, ingresos y aumento de la oferta laboral.
+- **Demográficos:** Características de la población, mortalidad infantil, separación de parejas.
+- **Políticos:** Referente a deberes del estado frente a la población, educación, permisos maternales, disponibilidad de guarderías. [3]
+
+## Fuentes de información y segmentación de variables
+Para el presente trabajo se tomó la base de datos correspondiente a la encuesta nacional de calidad de vida 2018-2019, proporcionada por el Departamento Administrativo Nacional de Estadística (DANE) por medio del archivo nacional de datos (ANDA) . De allí, se usaron 9 tablas, que corresponden a: Datos de la vivienda , servicios del hogar, características y composición del hogar, salud, educación, fuerza de trabajo, condiciones de vida del hogar y tenencia de bienes, y uso energético del hogar.
+
+De las más de 150 variables contenidas en el total de datos, se hizo una escogencia de las más relevantes y se obtuvo una tabla final con 48 variables significativas, para así realizar una elección más detallada de las mismas. Todo lo anterior se hizo con el fin de construir un análisis para la posterior escogencia de un buen modelo predictivo, que tendrá como finalidad predecir la cantidad de hijos según las características del hogar. 
+
+## Descripción de variables
+- ***DIRECTORIO:*** número utilizado para identificar cada uno de los hogares.
+
+- ***ID:*** hace referencia al tipo de documento de identidad que poseen los integrantes del hogar. La variable se encuentra categorizada de la siguiente manera:
+	  
+	  1. Registro civil de nacimiento
+	  
+	  2. Tarjeta de identidad
+	  
+	  3. Cédula de ciudadanía
+	  
+	  4. Cédula de extranjería
+	  
+	  5. No posee ID
+	  
+- ***SEXO:*** se refiere a la categorización biológica de la persona, así:
+	  
+	  1. Hombre
+	  
+	  2. Mujer
+	  
+- ***EDAD:*** cantidad de años de la persona del hogar.
+
+- ***PARENTESCO:*** hace referencia al nivel de mando en el hogar, se encuentra categorizada así:
+	  
+	  1. Jefe de hogar
+	  
+	  2. Pareja del jefe de hogar
+	  
+- ***ESTADO CIVIL:***se refiere a la situación familiar provenientes de las relaciones de pareja. Entre las categorías se encuentran:
+	  
+	  1. No casado(a) y vive con la pareja hace menos de 2 años
+	  
+	  2. No casado(a) y vive con la pareja hace más de 2 años
+	  
+	  3. Viudo(a)
+	  
+	  4. Divorciado(a)
+	  
+	  5. Soltero(a)
+	  
+	  6. Casado(a)
+	  
+- ***CÓNYUGE:*** se refiere a la presencia de la pareja del jefe en el hogar.
+	  
+	  1. Sí
+	  
+	  2. No
+	  
+- ***PADRE:*** expone si el padre de los hijos vive en el hogar a través de las siguientes categorías:
+	  
+	  1. Sí
+	  
+	  2. No
+	  
+	  3. Fallecido
+	  
+- ***NIVEL EDUCATIVO PADRE:*** se obtiene el nivel educativo más alto que ha alcanzado el padre. Dicho nivel debe estar avalado por medio de una certificación o constancia.
+	  
+	  1. Primaria incompleta
+	  
+	  2. Primaria completa
+	  
+	  3. Secundaria incompleta
+	  
+	  4. Secundaria completa
+	  
+	  5. Técnica y/o tecnología incompleta
+	  
+	  6. Técnica y/o tecnólogía completa
+	  
+	  7. Pregrado universitario incompleto
+	  
+	  8. Pregrado universitario completo
+	  
+	  9. Ninguno
+	  
+	  10. Desconocido
+	  
+- ***MADRE:*** expone si la madre de los hijos vive en el hogar a través de las siguientes categorías:
+	  
+	  1. Sí
+	  
+	  2. No
+	  
+	  3. Fallecido
+	  
+- ***NIVEL EDUCATIVO PADRE:*** se obtiene el nivel educativo más alto que ha alcanzado la madre. Dicho nivel debe estar avalado por medio de una certificación o constancia.
+	  
+	  1. Primaria incompleta
+	  
+	  2. Primaria completa
+	  
+	  3. Secundaria incompleta
+	  
+	  4. Secundaria completa
+	  
+	  5. Técnica y/o tecnología incompleta
+	  
+	  6. Técnica y/o tecnólogía completa
+	  
+	  7. Pregrado universitario incompleto
+	  
+	  8. Pregrado universitario completo
+	  
+	  9. Ninguno
+	  
+	  10. Desconocido
+	  
+- ***ETNIA:*** comunidad cultural a la cual pertenece la persona.
+	  
+	  1. Indígena
+	  
+	  2. Gitano
+	  
+	  3. Raizal
+	  
+	  4. Palenquero
+	  
+	  5. Afrodescendiente
+	  
+	  6. Ninguno
+	  
+- ***CAMPESINO:*** se considera campesino
+	  
+	  1. Sí
+	  
+	  2. No
+	  
+-	***SATISFACCION VIDA:**
+
+- ***SATISFACCION ECONOMICA:***
+	
+- ***SATISFACCION SALUD:***
+	
+- ***SATISFACCION SEGURIDAD:***
+	
+- ***SATISFACCION TRABAJO:***
+	
+- ***FELICIDAD:***
+
+- ***PREOCUPACION:***
+
+- ***TRISTEZA:***
+	
+- ***DESEO DE VIVIR:***
+	
+- ***ESCALON VIDA:***
+
+- ***HIJOS:*** es la variable respuesta, y se define como la cantidad de hijos en un hogar. Es una variable numérica discreta y varía en el rango de 1 a 11.
+
+- ***SECTORES:***se refiere al lugar del país en donde se encuentra el hogar estudiado. Se clasifica así:
+	  
+	  1. Región Caribe
+	  
+	  2. Oriental(?)
+	  
+	  3. Central (?)
+	  
+	  4. Región Pacífico 
+	  
+	  5. Bogotá
+	  
+	  6. Antioquia
+	  
+	  7. Valle del Cauca
+	  
+	  8. San Andrés Islas
+	  
+	  9. Orinoquia, Amazonía
+	  
+- ***CLASE:*** se refiere al lugar donde se encuentra asentada la vivienda. Se clasifica en:
+
+	  1. Cabecera urbana
+	  
+	  2. Área rural
+	  
+- ***TIPO DE VIVIENDA:***se clasifica de la siguiente manera:
+	  
+	  1. Casa
+	  
+	  2. Apartamento
+	  
+	  3. Habitación unipersonal
+	  
+	  4. Casa indígena
+	  
+	  5. Otro (carpa, contenedor, vagón, etc.)
+
+- ***NÚMERO DE CUARTOS:*** 
+
+- ***NÚMERO DE CUARTOS PARA DORMIR:***
+
+- ***INGRESO HOGAR:*** es la cantidad de dinero que recibe el hogar en total, sumando los ingresos individuales de las personas pertenecientes.
+
+- ***INGRESO PERCAPITA:*** es la cantidad de dinero promedio que recibe una persona del hogar.
+
+- ***CANTIDAD PERSONAS EN EL HOGAR:*** cantidad de personas que conforman la familia que vive en el hogar.
+
+- ***TIENE EPS:***
+	  
+	  1. Sí
+	  
+	  2. No
+	  
+	  3. Desconocido
+	  
+- ***ENFERMEDAD GRAVE:*** hipertension - cancer - asma - etc
+	1 si
+	2 no
+	
+- ***ANALFABETISMO:*** la persona sabe leer y escribir.
+	  
+	  1. Sí
+	  
+	  2. No
+	  
+- ***ESTUDIA:***(?)
+
+	  1. Sí
+	  
+	  2. No
+	  
+- ***NIVEL EDUCATIVO:*** (?)
+	  
+	  1. Ninguno
+	  
+	  2. Preescolar
+	  
+	  3. Básica primaría (1º - 5º)
+	  
+	  4. Básica secundaría (6º - 9º)
+	  
+	  5. Media (10º--13º)
+	  
+	  6. Técnica incompleta
+	  
+	  7. Técnica incompleta
+	  
+	  8. Tecnología incompleta
+	  
+	  9. Tecnología completa
+	  
+	  10. Pregrado universitario incompleto
+	  
+	  11. Pregrado universitario completo
+	  
+	  12. Postgrado incompleto
+	  
+	  13. Postgrado completo
+	  
+- ***PÚBLICO - PRIVADO:*** el establecimiento educativo es público o privado.
+	  
+	  1. Oficial/público
+	  
+	  2. No oficial/privado
+	  
+- ***LEE:*** cuenta con un pasatiempos como leer.
+	  
+	  1. Oficial/público
+	  
+	  2. No oficial/privado
+	  
+- ***ACTIVIDAD:*** actividad en la que ocupa su tiempo.
+	  
+	  1. Trabajo
+	  
+	  2. Busqueda de trabajo
+	  
+	  3. Estudiante
+	  
+	  4. Oficios del hogar
+	  
+	  5. Incapacidad permanente para trabajar
+	  
+	  6. Otra
+	  
+- ***SUBSIDIO:*** nombre del subsidio que recibe
+
+- ***DINERO SUBSIDIO:*** dinero que recibe del subsidio
+
+- ***SUBSIDIOS: ***
+	  
+	  1. Si recibe subsidio
+	  
+	  2. No recibe subsidio
+	  
+- ***NÚMERO DE CARGAS EN LA LAVADORA:*** número de veces que lava ropa a la semana. Cuando la familia no tiene lavadora, se deb especificar.
+
+- ***TAMAÑO DE LA NEVERA:***
+	  
+	  1. Pequeña
+	  
+	  2. Mediana
+	  
+	  3. Grande
+	  
+- ***HORAS PC:*** número de horas que usa el pc.
+
+- ***PAGO ENERGÍA:*** dinero pago energia mes pasado. ()
+
+- ***PAGO GAS:*** dinero pago gas mes pasado.
+
+## Análisis descriptivo
+
+## Modelo propuesto
+
+## Consideraciones
+- Hogares en los que solo hay 1 familia
+
+## Resultados del modelo
+
+## Análisis de resultados
+
+## Conclusiones
+
+## Referencias
+[1]. https://observatoriodefamilia.dnp.gov.co/Documents/Boletines/bolet%C3%ADn-3---observatorio-de-familias.pdf
+
+[2]. https://bdigital.uexternado.edu.co/bitstream/001/2223/1/DKA-spa-2019-Tipologias_de_hogar_en_Colombia_2000_2015_caracteristicas_sociodemograficas_de_las_mujeres
+
+[3]. https://repository.libertadores.edu.co/bitstream/handle/11371/2016/Romero_Joaqu%c3%adn_2019.pdf?sequence=1&isAllowed=y
+

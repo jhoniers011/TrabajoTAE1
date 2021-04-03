@@ -1,4 +1,4 @@
-DIRECTORIO,Num_Cuartos,Num_cuartos_para_dormir,CANT_PERSONAS_HOGAR,Ingreso_Hogares,Ingreso_Per_capita
+DIRECTORIO,Num_Cuartos,Num_cuartos_para_dormir,cantidad_personas,Ingreso_Hogares,Ingreso_Per_capitas
 7120001,3,2,4,3800000,950000
 7120002,5,4,10,3656652,365665
 7120005,5,1,2,4200000,2100000

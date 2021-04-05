@@ -1,3 +1,4 @@
+<div class=text-justify>
 ---
 title: "MODELO DE PREDICCIÓN DEL NÚMERO DE HIJOS EN LOS HOGARES COLOMBIANOS"
 author:
@@ -11,7 +12,6 @@ output:
   html_document: default
   pdf_document: default
 ---
-<div class=text-justify>
 
 ## Introducción
 Gran parte de las políticas públicas de un país se formulan teniendo en cuenta el número de habitantes de su territorio [1], por ello, conocer el comportamiento de la natalidad se convierte en un factor clave para las instituciones gubernamentales. Teniendo en cuenta lo anterior, se decide desarrollar un modelo de predicción el cual determine la cantidad de hijos que tendría un hogar de acuerdo a las dinámicas y características propias de dicha unidad de estudio.A continuación, se expondrá de manera detallada y secuencial, los pasos seguidos para el desarrollo del modelo obejtivo.
@@ -51,7 +51,7 @@ Con las consideraciones mencionadas se obtiene una primera base de datos filtrad
 - Para el mismo hogar, se tenían dos filas de datos que debían apuntar a la misma predicción, pues se trataban de respuestas dadas por el jefe del hogar y el cónyuge del jefe del hogar.
   - La solución que se planteó fue crear nuevas variables especificando si se trataba del jefe del hogar o del cónyuge, esto para el mismo hogar. Esto ocasionó que se duplicaran la cantidad de variables, pero mantuvo la información relevante para cada familia.
   
-Con lo anterior, se llegó a una tabla final con $75$ variables, que se procedieron a ser analizadas estadísticamente para llevar a cabo una segunda selección. 
+Con lo anterior, se llegó a una tabla final con $74$ variables, que se procedieron a ser analizadas estadísticamente para llevar a cabo una segunda selección. 
 
 ***TENIENDO EN CUENTA LO ANTERIOR, SE CONCLUYÓ QUE EL MODELO ESTARÍA LIMITADO PARA HOGARES DONDE HUBIERA PRESENCIA DE UNA SOLA FAMILIA Y ADICIONALMENTE QUE HUBIERA PRESENCIA DE LOS DOS CÓNYUGES EN EL HOGAR***
 
@@ -168,7 +168,7 @@ Con lo anterior, se llegó a una tabla final con $75$ variables, que se procedie
 	  
 	  2. Corregimiento, Área rural
 
-- ***TIPO_DE_IVIENDA:*** clasifica el tipo de vivienda de la siguiente manera:
+- ***TIPO_DE_VIVIENDA:*** clasifica el tipo de vivienda de la siguiente manera:
 	  
 	  1. Casa
 	  
@@ -401,11 +401,36 @@ Con lo anterior, se llegó a una tabla final con $75$ variables, que se procedie
 Después de realizar una pequeña definición, se identificaron que algunas variables no generaban valor dentro de la base de datos por distintas razones como las siguientes:
 - Directorio: solo distingue que se tienen hogares diferentes, lo cual se da por entendido al analizar cada una de las unidades muestrales.
 - Parentesco_Jefe/Parentesco_Cónyuge: no varía para ninguna unidad muestreal debido a que siempre se tendra el parentesco jefe o pareja del jefe.
- 
+- Hijo x/Hijo y: son redundantes, ya que definen el número de hijos en el hogar, que es la variable respuesta. Se elimina una de las dos con el fin de obtener solo una variable respuesta.
 
-## Análisis descriptivo
+Con lo anterior, resulta una base de datos con $70$ variables, las cuales se estudian estadisticamente en el siguiente apartado.
+
+## Análisis exploratorio
+
+```{r}
+#Se toman los datos
+datos <- read.csv("~/ALLISON/TAE/Proyecto/Datos_final.csv", header = TRUE, sep = ",")#Aquí se pone donde se encuentre SU ARCHIVO DE DATOS
+#Se eliminan las variables descritas en el apartado anterior
+datos <- datos[,-c(1, 2, 47, 64)]
+#Se ordena la base de datos para que hijos sea la primera columna
+datos <- datos[,c(17, 1:16, 18:74)]
+```
+
 ### Descripción de variables categóricas
-Dentro de las $78$ variables que se tienen en la base de datos, 
+De las $70$ variables de la base de datos, se tienen $64$ variables categóricas, y se realiza el siguiente análisis exploratorio para cada una de ellas
+
+**Sexo_Jefe/Sexo_Conyuge**
+```{r}
+library(knitr)
+kable(table(datos$Sexo_Jefe))
+kable(table(datos$Sexo_Conyuge))
+par(mfrow=c(1,2))
+barplot(table(datos$Sexo_Jefe))
+barplot(table(datos$Sexo_Conyuge))
+```
+
+
+
 
 ## Modelo propuesto
 

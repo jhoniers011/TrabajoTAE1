@@ -180,6 +180,7 @@ pre code {
 </div>
 
 
+<div class="text-justify">
 <div id="introducción" class="section level2">
 <h2>Introducción</h2>
 <p>Gran parte de las políticas públicas de un país se formulan teniendo en cuenta el número de habitantes de su territorio [1], por ello, conocer el comportamiento de la natalidad se convierte en un factor clave para las instituciones gubernamentales. Teniendo en cuenta lo anterior, se decide desarrollar un modelo de predicción el cual determine la cantidad de hijos que tendría un hogar de acuerdo a las dinámicas y características propias de dicha unidad de estudio.A continuación, se expondrá de manera detallada y secuencial, los pasos seguidos para el desarrollo del modelo obejtivo.</p>
@@ -225,7 +226,7 @@ pre code {
 <li>La solución que se planteó fue crear nuevas variables especificando si se trataba del jefe del hogar o del cónyuge, esto para el mismo hogar. Esto ocasionó que se duplicaran la cantidad de variables, pero mantuvo la información relevante para cada familia.</li>
 </ul></li>
 </ul>
-<p>Con lo anterior, se llegó a una tabla final con <span class="math inline">\(78\)</span> variables, que se procedieron a ser analizadas estadísticamente para llevar a cabo una segunda selección.</p>
+<p>Con lo anterior, se llegó a una tabla final con <span class="math inline">\(75\)</span> variables, que se procedieron a ser analizadas estadísticamente para llevar a cabo una segunda selección.</p>
 <p><strong><em>TENIENDO EN CUENTA LO ANTERIOR, SE CONCLUYÓ QUE EL MODELO ESTARÍA LIMITADO PARA HOGARES DONDE HUBIERA PRESENCIA DE UNA SOLA FAMILIA Y ADICIONALMENTE QUE HUBIERA PRESENCIA DE LOS DOS CÓNYUGES EN EL HOGAR</em></strong></p>
 </div>
 </div>
@@ -293,7 +294,7 @@ pre code {
 <li><p><strong><em>FELICIDAD_Jefe / FELICIDAD_Cónyuge:</em></strong> hace referencia a qué tan feliz se sintió el jefe del hogar o el cónyuge del jefe del hogar, en el último día, en una escala del 0 al 10, donde 0 significa que no experimento “para nada” esa sensación y 10 significa que experimentó “todo el tiempo” esa sensación.</p></li>
 <li><p><strong><em>TRISTEZA_Jefe / TRISTEZA_Cónyuge:</em></strong> hace referencia a qué tan triste se sintió el jefe del hogar o el cónyuge del jefe del hogar, en el último día, en una escala del 0 al 10, donde 0 significa que no experimento “para nada” esa sensación y 10 significa que experimentó “todo el tiempo” esa sensación.</p></li>
 <li><p><strong><em>ESCALÓN_VIDA_Jefe / ESCALÓN_VIDA_Cónyuge:</em></strong> hace referencia al momento de la vida en que se encuentra el jefe del hogar o el cónyuge del jefe del hogar, imaginando una escalera que va del 0 al 10, donde 0 es el escalón más bajo y 10 el escalón más alto. El más alto representa la mejor vida que se podría tener y el más bajo, la peor.</p></li>
-<li><p><strong><em>REGIÓN:</em></strong>se refiere al lugar del país en donde se encuentra el hogar estudiado. Se clasifica así:</p>
+<li><p><strong><em>REGIÓN:</em></strong> se refiere al lugar del país en donde se encuentra el hogar estudiado. Se clasifica así:</p>
 <pre><code>1. Región Caribe
 
 2. Oriental
@@ -315,7 +316,7 @@ pre code {
 <pre><code>1. Cabecera urbana
 
 2. Corregimiento, Área rural</code></pre></li>
-<li><p><strong><em>TIPO_DE_IVIENDA:</em></strong>clasifica el tipo de vivienda de la siguiente manera:</p>
+<li><p><strong><em>TIPO_DE_IVIENDA:</em></strong> clasifica el tipo de vivienda de la siguiente manera:</p>
 <pre><code>1. Casa
 
 2. Apartamento
@@ -325,7 +326,7 @@ pre code {
 4. Casa indígena
 
 5. Otro (carpa, contenedor, vagón, etc.)</code></pre></li>
-<li><p><strong><em>MATERIAL_EXTERIOR:</em></strong>especifica el material predominante en las paredes exteriores del hogar, dentro de las siguientes categorías:</p>
+<li><p><strong><em>MATERIAL_EXTERIOR:</em></strong> especifica el material predominante en las paredes exteriores del hogar, dentro de las siguientes categorías:</p>
 <pre><code>1. Bloque, ladrillo, piedra, madera pulida
 
 2. Adobe
@@ -343,7 +344,7 @@ pre code {
 8. Tela, latas, desechos, plástico
 
 9. Sin paredes</code></pre></li>
-<li><p><strong><em>MATERIAL_PISO:</em></strong>especifica el material predominante de los pisos del hogar, dentro de las siguientes categorías:</p>
+<li><p><strong><em>MATERIAL_PISO:</em></strong> especifica el material predominante de los pisos del hogar, dentro de las siguientes categorías:</p>
 <pre><code>1. Alfombra, tapete
 
 2. Madera pulida
@@ -357,7 +358,7 @@ pre code {
 6. Cemento, gravilla
 
 7. Tierra, arena</code></pre></li>
-<li><p><strong><em>MATERIAL_TECHO:</em></strong>especifica el material predominante del techo o cubierta del hogar, dentro de las siguientes categorías:</p>
+<li><p><strong><em>MATERIAL_TECHO:</em></strong> especifica el material predominante del techo o cubierta del hogar, dentro de las siguientes categorías:</p>
 <pre><code>1. Plancha de concreto, cemento
 
 2. Tejas de barro
@@ -383,11 +384,11 @@ pre code {
 5. Medio-alto
 
 6. Alto</code></pre></li>
-<li><p><strong><em>NÚMERO_DE_CUARTOS:</em></strong>incluyendo la sala y el comedor, representa el número de cuartos de los que dispone el hogar</p></li>
-<li><p><strong><em>NÚMERO_DE_CUARTOS_PARA_DORMIR:</em></strong>del número de cuartos totales, en cuántos de ellos duermen las personas del hogar</p></li>
-<li><p><strong><em>INGRESO_HOGAR:</em></strong>se refiere al ingreso mensual total del hogar</p></li>
-<li><p><strong><em>INGRESO_PERCÁPITA:</em></strong>se refiere al ingreso per-cápita del hogar, es decir, al ingreso promedio por integegrante del hogar.</p></li>
-<li><p><strong><em>CANTIDAD_PERSONAS:</em></strong>se refiere a la cantidad del personas en el hogar</p></li>
+<li><p><strong><em>NÚMERO_DE_CUARTOS:</em></strong> incluyendo la sala y el comedor, representa el número de cuartos de los que dispone el hogar</p></li>
+<li><p><strong><em>NÚMERO_DE_CUARTOS_PARA_DORMIR:</em></strong> del número de cuartos totales, en cuántos de ellos duermen las personas del hogar</p></li>
+<li><p><strong><em>INGRESO_HOGAR:</em></strong> se refiere al ingreso mensual total del hogar</p></li>
+<li><p><strong><em>INGRESO_PERCÁPITA:</em></strong> se refiere al ingreso per-cápita del hogar, es decir, al ingreso promedio por integegrante del hogar.</p></li>
+<li><p><strong><em>CANTIDAD_PERSONAS:</em></strong> se refiere a la cantidad del personas en el hogar</p></li>
 <li><p><strong><em>TIENE_EPS_Jefe / TIENE_EPS_Cónyuge:</em></strong> hace referencia a si el jefe del hogar o el cónyuge del jefe del hogar están afiliados (cotizante o beneficiario) a alguna entidad de seguridad social en salud - EPS:</p>
 <pre><code>1. Sí
 
@@ -502,18 +503,17 @@ pre code {
 9. No sabe/no responde</code></pre></li>
 <li><p><strong><em>HIJOS_x / HIJOS_y:</em></strong> es la variable respuesta, y se define como la cantidad de hijos en un hogar. Es una variable numérica discreta y varía en el rango de 0 a 11.</p></li>
 </ul>
+<p>Después de realizar una pequeña definición, se identificaron que algunas variables no generaban valor dentro de la base de datos por distintas razones como las siguientes: - Directorio: solo distingue que se tienen hogares diferentes, lo cual se da por entendido al analizar cada una de las unidades muestrales. - Parentesco_Jefe/Parentesco_Cónyuge: no varía para ninguna unidad muestreal debido a que siempre se tendra el parentesco jefe o pareja del jefe.</p>
 </div>
 <div id="análisis-descriptivo" class="section level2">
 <h2>Análisis descriptivo</h2>
+<div id="descripción-de-variables-categóricas" class="section level3">
+<h3>Descripción de variables categóricas</h3>
+<p>Dentro de las <span class="math inline">\(78\)</span> variables que se tienen en la base de datos,</p>
+</div>
 </div>
 <div id="modelo-propuesto" class="section level2">
 <h2>Modelo propuesto</h2>
-</div>
-<div id="consideraciones" class="section level2">
-<h2>Consideraciones</h2>
-<ul>
-<li>Hogares en los que solo hay 1 familia</li>
-</ul>
 </div>
 <div id="resultados-del-modelo" class="section level2">
 <h2>Resultados del modelo</h2>
@@ -529,6 +529,7 @@ pre code {
 <p>[1]. <a href="https://observatoriodefamilia.dnp.gov.co/Documents/Boletines/bolet%C3%ADn-3---observatorio-de-familias.pdf" class="uri">https://observatoriodefamilia.dnp.gov.co/Documents/Boletines/bolet%C3%ADn-3---observatorio-de-familias.pdf</a></p>
 <p>[2]. <a href="https://bdigital.uexternado.edu.co/bitstream/001/2223/1/DKA-spa-2019-Tipologias_de_hogar_en_Colombia_2000_2015_caracteristicas_sociodemograficas_de_las_mujeres" class="uri">https://bdigital.uexternado.edu.co/bitstream/001/2223/1/DKA-spa-2019-Tipologias_de_hogar_en_Colombia_2000_2015_caracteristicas_sociodemograficas_de_las_mujeres</a></p>
 <p>[3]. <a href="https://repository.libertadores.edu.co/bitstream/handle/11371/2016/Romero_Joaqu%c3%adn_2019.pdf?sequence=1&amp;isAllowed=y" class="uri">https://repository.libertadores.edu.co/bitstream/handle/11371/2016/Romero_Joaqu%c3%adn_2019.pdf?sequence=1&amp;isAllowed=y</a></p>
+</div>
 </div>
 
 

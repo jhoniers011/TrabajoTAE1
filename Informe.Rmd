@@ -11,6 +11,7 @@ output:
   html_document: default
   pdf_document: default
 ---
+<div class=text-justify>
 
 ## Introducción
 Gran parte de las políticas públicas de un país se formulan teniendo en cuenta el número de habitantes de su territorio [1], por ello, conocer el comportamiento de la natalidad se convierte en un factor clave para las instituciones gubernamentales. Teniendo en cuenta lo anterior, se decide desarrollar un modelo de predicción el cual determine la cantidad de hijos que tendría un hogar de acuerdo a las dinámicas y características propias de dicha unidad de estudio.A continuación, se expondrá de manera detallada y secuencial, los pasos seguidos para el desarrollo del modelo obejtivo.
@@ -50,7 +51,7 @@ Con las consideraciones mencionadas se obtiene una primera base de datos filtrad
 - Para el mismo hogar, se tenían dos filas de datos que debían apuntar a la misma predicción, pues se trataban de respuestas dadas por el jefe del hogar y el cónyuge del jefe del hogar.
   - La solución que se planteó fue crear nuevas variables especificando si se trataba del jefe del hogar o del cónyuge, esto para el mismo hogar. Esto ocasionó que se duplicaran la cantidad de variables, pero mantuvo la información relevante para cada familia.
   
-Con lo anterior, se llegó a una tabla final con $78$ variables, que se procedieron a ser analizadas estadísticamente para llevar a cabo una segunda selección. 
+Con lo anterior, se llegó a una tabla final con $75$ variables, que se procedieron a ser analizadas estadísticamente para llevar a cabo una segunda selección. 
 
 ***TENIENDO EN CUENTA LO ANTERIOR, SE CONCLUYÓ QUE EL MODELO ESTARÍA LIMITADO PARA HOGARES DONDE HUBIERA PRESENCIA DE UNA SOLA FAMILIA Y ADICIONALMENTE QUE HUBIERA PRESENCIA DE LOS DOS CÓNYUGES EN EL HOGAR***
 
@@ -397,7 +398,14 @@ Con lo anterior, se llegó a una tabla final con $78$ variables, que se procedie
 
 - ***HIJOS_x / HIJOS_y:*** es la variable respuesta, y se define como la cantidad de hijos en un hogar. Es una variable numérica discreta y varía en el rango de 0 a 11.
 
+Después de realizar una pequeña definición, se identificaron que algunas variables no generaban valor dentro de la base de datos por distintas razones como las siguientes:
+- Directorio: solo distingue que se tienen hogares diferentes, lo cual se da por entendido al analizar cada una de las unidades muestrales.
+- Parentesco_Jefe/Parentesco_Cónyuge: no varía para ninguna unidad muestreal debido a que siempre se tendra el parentesco jefe o pareja del jefe.
+ 
+
 ## Análisis descriptivo
+### Descripción de variables categóricas
+Dentro de las $78$ variables que se tienen en la base de datos, 
 
 ## Modelo propuesto
 
@@ -414,3 +422,4 @@ Con lo anterior, se llegó a una tabla final con $78$ variables, que se procedie
 
 [3]. https://repository.libertadores.edu.co/bitstream/handle/11371/2016/Romero_Joaqu%c3%adn_2019.pdf?sequence=1&isAllowed=y
 
+</div>

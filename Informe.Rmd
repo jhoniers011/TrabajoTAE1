@@ -38,23 +38,23 @@ De las más de 150 variables contenidas en el total de datos, se hizo una primer
 - Se tomaron las variables que podrían afectar de manera significativa la predicción del modelo sobre el número de hijos por hogar, teniendo en cuenta los factores asociados a la natalidad consultados en la literatura y mencionados anteriormente.
 - Se tomaron las variables que estuvieran bien categorizadas y que no tuveran registro de frases y/o letras.
 - Se tomaron variables que no tuvieran una gran cantidad de datos vacios para evitar una reducción drástica de la base de datos.
+- Se tomaron aquellos hogares en donde viviera una única familia.
 
 ### Base de datos
 
-Con las consideraciones mencionadas se obtiene una primera base de datos filtrada. Sin embargo, se observan 2 inconvenientes principales que debían ser solucionados para evitar futuros obstáculos con el modelo:
+Con las consideraciones mencionadas se obtiene una primera base de datos filtrada. Sin embargo, se observan dos inconvenientes principales que debían ser solucionados para evitar futuros obstáculos con el modelo:
 
 - Para variables aparentemente importantes según la literatura, como por ejemplo si el jefe del hogar vive o no con su cónyuge, habían respuestas vacías.
   - La solución que se plateó fue llevar dichas respuestas vacías a una respuesta negativa. En caso de que esta no existiera, se creaba una nueva respuesta dónde se consideraba desconocimiento por parte de la persona, es decir, no sabe/no responde. 
   
 - Para el mismo hogar, se tenían dos filas de datos que debían apuntar a la misma predicción, pues se trataban de respuestas dadas por el jefe del hogar y el cónyuge del jefe del hogar.
   - La solución que se planteó fue crear nuevas variables especificando si se trataba del jefe del hogar o del cónyuge, esto para el mismo hogar. Esto ocasionó que se duplicaran la cantidad de variables, pero mantuvo la información relevante para cada familia.
-  Sin embargo, al hacer esto ____________________________explicacion bien mela_________________
   
-Con lo anterior, se legó a una tabla final con $78$ variables, que se procedieron a ser analizadas estadísticamente para llevar a cabo una segunda selección. 
+Con lo anterior, se llegó a una tabla final con $78$ variables, que se procedieron a ser analizadas estadísticamente para llevar a cabo una segunda selección. 
+
+***TENIENDO EN CUENTA LO ANTERIOR, SE CONCLUYÓ QUE EL MODELO ESTARÍA LIMITADO PARA HOGARES DONDE HUBIERA PRESENCIA DE UNA SOLA FAMILIA Y ADICIONALMENTE QUE HUBIERA PRESENCIA DE LOS DOS CÓNYUGES EN EL HOGAR***
 
 ## Descripción de variables
-
-
 - ***DIRECTORIO:*** número utilizado para identificar cada uno de los hogares.
 
 - ***ID_Jefe / ID_Cónyuge:*** hace referencia al tipo de documento de identidad que pose el jefe del hogar y el cónyuge del jefe del hogar. La variable se encuentra categorizada de la siguiente manera:
@@ -127,29 +127,27 @@ Con lo anterior, se legó a una tabla final con $78$ variables, que se procedier
 	  
 	  2. No
 
--	***SATISFACCION VIDA Jefe / SATISFACCION VIDA Cónyuge:** se refiere al nivel de satisfacción del jefe del hogar o del cónyuge del jefe del hogar con su vida actual, en una escala del 0 al 10, donde 0 significa que se siente "totalmente insatisfecho" y 10 significa que se siente "totalmente satisfecho".
+-	***SATISFACCIÓN_VIDA_Jefe / SATISFACCIÓN_VIDA_Cónyuge:*** se refiere al nivel de satisfacción del jefe del hogar o del cónyuge del jefe del hogar con su vida actual, en una escala del 0 al 10, donde 0 significa que se siente "totalmente insatisfecho" y 10 significa que se siente "totalmente satisfecho".
 
--	***SATISFACCION ECONÓMICA Jefe / SATISFACCION ECONÓMICA Cónyuge:** se refiere al nivel de satisfacción del jefe del hogar o del cónyuge del jefe del hogar con su economía actual, en una escala del 0 al 10, donde 0 significa que se siente "totalmente insatisfecho" y 10 significa que se siente "totalmente satisfecho".
+-	***SATISFACCIÓN_ECONÓMICA_Jefe / SATISFACCIÓN_ECONÓMICA_Cónyuge:*** se refiere al nivel de satisfacción del jefe del hogar o del cónyuge del jefe del hogar con su economía actual, en una escala del 0 al 10, donde 0 significa que se siente "totalmente insatisfecho" y 10 significa que se siente "totalmente satisfecho".
 
--	***SATISFACCION SALUD Jefe / SATISFACCION SALUD Cónyuge:** se refiere al nivel de satisfacción del jefe del hogar o del cónyuge del jefe del hogar con su salud actual, en una escala del 0 al 10, donde 0 significa que se siente "totalmente insatisfecho" y 10 significa que se siente "totalmente satisfecho".
+-	***SATISFACCIÓN_SALUD_Jefe / SATISFACCIÓN_SALUD_Cónyuge:*** se refiere al nivel de satisfacción del jefe del hogar o del cónyuge del jefe del hogar con su salud actual, en una escala del 0 al 10, donde 0 significa que se siente "totalmente insatisfecho" y 10 significa que se siente "totalmente satisfecho".
 
--	***SATISFACCION TRABAJO Jefe / SATISFACCION TRABAJO Cónyuge:** se refiere al nivel de satisfacción del jefe del hogar o del cónyuge del jefe del hogar con su trabajo actual, en una escala del 0 al 10, donde 0 significa que se siente "totalmente insatisfecho" y 10 significa que se siente "totalmente satisfecho".
+-	***SATISFACCIÓN_TRABAJO_Jefe / SATISFACCIÓN_TRABAJO_Cónyuge:*** se refiere al nivel de satisfacción del jefe del hogar o del cónyuge del jefe del hogar con su trabajo actual, en una escala del 0 al 10, donde 0 significa que se siente "totalmente insatisfecho" y 10 significa que se siente "totalmente satisfecho".
 
--	***FELICIDAD_Jefe / FELICIDAD_Cónyuge:** hace referencia a qué tan feliz se sintió el jefe del hogar o el cónyuge del jefe del hogar, en el último día, en una escala del 0 al 10, donde 0 significa que no experimento "para nada" esa sensación y 10 significa que experimentó "todo el tiempo" esa sensación.
+-	***FELICIDAD_Jefe / FELICIDAD_Cónyuge:*** hace referencia a qué tan feliz se sintió el jefe del hogar o el cónyuge del jefe del hogar, en el último día, en una escala del 0 al 10, donde 0 significa que no experimento "para nada" esa sensación y 10 significa que experimentó "todo el tiempo" esa sensación.
 
--	***TRISTEZA_Jefe / TRISTEZA_Cónyuge:** hace referencia a qué tan triste se sintió el jefe del hogar o el cónyuge del jefe del hogar, en el último día, en una escala del 0 al 10, donde 0 significa que no experimento "para nada" esa sensación y 10 significa que experimentó "todo el tiempo" esa sensación.
+-	***TRISTEZA_Jefe / TRISTEZA_Cónyuge:*** hace referencia a qué tan triste se sintió el jefe del hogar o el cónyuge del jefe del hogar, en el último día, en una escala del 0 al 10, donde 0 significa que no experimento "para nada" esa sensación y 10 significa que experimentó "todo el tiempo" esa sensación.
 
--	***ESCALÓN VIDA Jefe / ESCALÓN VIDA Cónyuge:** hace referencia al momento de la vida en que se encuentra el jefe del hogar o el cónyuge del jefe del hogar, imaginando una escalera que va del 0 al 10, donde 0 es el escalón más bajo y 10 el escalón más alto. El más alto representa la mejor vida que se podría tener y el más bajo, la peor.
+-	***ESCALÓN_VIDA_Jefe / ESCALÓN_VIDA_Cónyuge:*** hace referencia al momento de la vida en que se encuentra el jefe del hogar o el cónyuge del jefe del hogar, imaginando una escalera que va del 0 al 10, donde 0 es el escalón más bajo y 10 el escalón más alto. El más alto representa la mejor vida que se podría tener y el más bajo, la peor.
 
-- ***HIJOS_x / HIJOS_y:*** ¿? la cantidad de hijos? ¿Parentesco = 3?
-
-- ***REGIÓN:***se refiere al lugar del país en donde se encuentra el hogar estudiado. Se clasifica así:
+- ***REGIÓN:*** se refiere al lugar del país en donde se encuentra el hogar estudiado. Se clasifica así:
 	  
 	  1. Región Caribe
 	  
-	  2. Oriental(?)
+	  2. Oriental
 	  
-	  3. Central (?)
+	  3. Central
 	  
 	  4. Región Pacífico 
 	  
@@ -169,7 +167,7 @@ Con lo anterior, se legó a una tabla final con $78$ variables, que se procedier
 	  
 	  2. Corregimiento, Área rural
 
-- ***TIPO DE VIVIENDA:***clasifica el tipo de vivienda de la siguiente manera:
+- ***TIPO_DE_IVIENDA:*** clasifica el tipo de vivienda de la siguiente manera:
 	  
 	  1. Casa
 	  
@@ -181,7 +179,7 @@ Con lo anterior, se legó a una tabla final con $78$ variables, que se procedier
 	  
 	  5. Otro (carpa, contenedor, vagón, etc.)
 
-- ***MATERIAL EXTERIOR:***especifica el material predominante en las paredes exteriores del hogar, dentro de las siguientes categorías:
+- ***MATERIAL_EXTERIOR:*** especifica el material predominante en las paredes exteriores del hogar, dentro de las siguientes categorías:
 	  
 	  1. Bloque, ladrillo, piedra, madera pulida
 	  
@@ -201,7 +199,7 @@ Con lo anterior, se legó a una tabla final con $78$ variables, que se procedier
 	  
 	  9. Sin paredes
 	  
-- ***MATERIAL PISO:***especifica el material predominante de los pisos del hogar, dentro de las siguientes categorías:
+- ***MATERIAL_PISO:*** especifica el material predominante de los pisos del hogar, dentro de las siguientes categorías:
 	  
 	  1. Alfombra, tapete
 	  
@@ -217,7 +215,7 @@ Con lo anterior, se legó a una tabla final con $78$ variables, que se procedier
 	  
 	  7. Tierra, arena
 	  
-- ***MATERIAL TECHO:***especifica el material predominante del techo o cubierta del hogar, dentro de las siguientes categorías:
+- ***MATERIAL_TECHO:*** especifica el material predominante del techo o cubierta del hogar, dentro de las siguientes categorías:
 	  
 	  1. Plancha de concreto, cemento
 	  
@@ -247,17 +245,17 @@ Con lo anterior, se legó a una tabla final con $78$ variables, que se procedier
 	  
 	  6. Alto
 
-- ***NÚMERO DE CUARTOS:***incluyendo la sala y el comedor, representa el número de cuartos de los que dispone el hogar
+- ***NÚMERO_DE_CUARTOS:*** incluyendo la sala y el comedor, representa el número de cuartos de los que dispone el hogar
 
-- ***NÚMERO DE CUARTOS PARA DORMIR:***del número de cuartos totales, en cuántos de ellos duermen las personas del hogar
+- ***NÚMERO_DE_CUARTOS_PARA_DORMIR:*** del número de cuartos totales, en cuántos de ellos duermen las personas del hogar
 
-- ***INGRESO HOGAR:***se refiere al ingreso mensual total del hogar
+- ***INGRESO_HOGAR:*** se refiere al ingreso mensual total del hogar
 
-- ***INGRESO PERCÁPITA:***se refiere al ingreso per-cápita del hogar
+- ***INGRESO_PERCÁPITA:*** se refiere al ingreso per-cápita del hogar, es decir, al ingreso promedio por integegrante del hogar.
 
-- ***CANTIDAD PERSONAS:***se refiere a la cantidad del personas en el hogar
+- ***CANTIDAD_PERSONAS:*** se refiere a la cantidad del personas en el hogar
 
-- ***TIENE EPS Jefe / TIENE EPS Cónyuge:*** hace referencia a si el jefe del hogar o el cónyuge del jefe del hogar están afiliados (cotizante o beneficiario) a alguna entidad de seguridad social en salud - EPS:
+- ***TIENE_EPS_Jefe / TIENE_EPS_Cónyuge:*** hace referencia a si el jefe del hogar o el cónyuge del jefe del hogar están afiliados (cotizante o beneficiario) a alguna entidad de seguridad social en salud - EPS:
 	  
 	  1. Sí
 	  
@@ -285,7 +283,7 @@ Con lo anterior, se legó a una tabla final con $78$ variables, que se procedier
 	  
 	  2. No
 
-- ***ESTADO SALUD Jefe / ESTADO SALUD Cónyuge:*** hace referencia al estado general de salud del jefe del hogar o del cónyuge del jefe del hogar, así:
+- ***ESTADO_SALUD_Jefe / ESTADO_SALUD_Cónyuge:*** hace referencia al estado general de salud del jefe del hogar o del cónyuge del jefe del hogar, así:
 	  
 	  1. Muy bueno
 	  
@@ -295,240 +293,113 @@ Con lo anterior, se legó a una tabla final con $78$ variables, que se procedier
 	  
 	  4. Malo
 
-- ***ENFERMEDAD GRAVE Jefe / ENFEMERDAD GRAVE Cónyuge:*** hace referencia a si le han diagnostícado una enfermedad crónica (enfermedad de larga duración y prolongados tratamientos como: enfermedades cardiovasculares-hipertensión, asma, bronquitis crónica, gastritis, lupus, cáncer, gota, leucemia, diabetes, etc) al jefe del hogar o al cónyuge del jefe del hogar:
+- ***ENFERMEDAD_GRAVE_Jefe / ENFEMERDAD_GRAVE_Cónyuge:*** hace referencia a si le han diagnostícado una enfermedad crónica (enfermedad de larga duración y prolongados tratamientos como: enfermedades cardiovasculares-hipertensión, asma, bronquitis crónica, gastritis, lupus, cáncer, gota, leucemia, diabetes, etc) al jefe del hogar o al cónyuge del jefe del hogar:
 	  
 	  1. Si
 	  
 	  2. No
 
-
-
-## ________ACÁ QUEDÉ________
-
-
+- ***SABE_ESCRIBIR_LEER_Jefe / SABE_ESCRIBIR_LEER_Cónyuge:*** hace referencia a si el jefe y el conyugé saben escribir y leer bien. Las posibles respuestas que se pueden obtener son:
 	  
-- ***NIVEL EDUCATIVO PADRE:*** se obtiene el nivel educativo más alto que ha alcanzado el padre. Dicho nivel debe estar avalado por medio de una certificación o constancia.
-	  
-	  1. Primaria incompleta
-	  
-	  2. Primaria completa
-	  
-	  3. Secundaria incompleta
-	  
-	  4. Secundaria completa
-	  
-	  5. Técnica y/o tecnología incompleta
-	  
-	  6. Técnica y/o tecnólogía completa
-	  
-	  7. Pregrado universitario incompleto
-	  
-	  8. Pregrado universitario completo
-	  
-	  9. Ninguno
-	  
-	  10. Desconocido
-	  
-- ***MADRE:*** expone si la madre de los hijos vive en el hogar a través de las siguientes categorías:
-	  
-	  1. Sí
+	  1. Si
 	  
 	  2. No
-	  
-	  3. Fallecido
 
-
+- ***ESTUDIA_Jefe / ESTUDIA_Cónyuge:*** se refiere a si el jefe y la conyugé se encuentran realizando algún estudio, se categoriza así:
 	  
-- ***NIVEL EDUCATIVO PADRE:*** se obtiene el nivel educativo más alto que ha alcanzado la madre. Dicho nivel debe estar avalado por medio de una certificación o constancia.
-	  
-	  1. Primaria incompleta
-	  
-	  2. Primaria completa
-	  
-	  3. Secundaria incompleta
-	  
-	  4. Secundaria completa
-	  
-	  5. Técnica y/o tecnología incompleta
-	  
-	  6. Técnica y/o tecnólogía completa
-	  
-	  7. Pregrado universitario incompleto
-	  
-	  8. Pregrado universitario completo
-	  
-	  9. Ninguno
-	  
-	  10. Desconocido
-	  
-- ***ETNIA:*** comunidad cultural a la cual pertenece la persona.
-	  
-	  1. Indígena
-	  
-	  2. Gitano
-	  
-	  3. Raizal
-	  
-	  4. Palenquero
-	  
-	  5. Afrodescendiente
-	  
-	  6. Ninguno
-	  
-- ***CAMPESINO:*** se considera campesino
-	  
-	  1. Sí
+	  1. Si
 	  
 	  2. No
+
+- ***NIVEL_EDUCATIVO_Jefe / NIVEL_EDUCATIVO_Cónyuge:*** hace referencia al nivel de educación más alto alcanzado por el jefe del hogar y la conyugé:
 	  
--	***SATISFACCION VIDA:**
-
-- ***SATISFACCION ECONOMICA:***
-	
-- ***SATISFACCION SALUD:***
-	
-- ***SATISFACCION SEGURIDAD:***
-	
-- ***SATISFACCION TRABAJO:***
-	
-- ***FELICIDAD:***
-
-- ***PREOCUPACION:***
-
-- ***TRISTEZA:***
-	
-- ***DESEO DE VIVIR:***
-	
-- ***ESCALON VIDA:***
-
-- ***HIJOS:*** es la variable respuesta, y se define como la cantidad de hijos en un hogar. Es una variable numérica discreta y varía en el rango de 1 a 11.
-
-
-	  
-
-	  
-
-
-
-
-
-
-- ***INGRESO HOGAR:*** es la cantidad de dinero que recibe el hogar en total, sumando los ingresos individuales de las personas pertenecientes.
-
-- ***INGRESO PERCAPITA:*** es la cantidad de dinero promedio que recibe una persona del hogar.
-
-- ***CANTIDAD PERSONAS EN EL HOGAR:*** cantidad de personas que conforman la familia que vive en el hogar.
-
-- ***TIENE EPS:***
-	  
-	  1. Sí
-	  
-	  2. No
-	  
-	  3. Desconocido
-	  
-- ***ENFERMEDAD GRAVE:*** hipertension - cancer - asma - etc
-	1 si
-	2 no
-	
-- ***ANALFABETISMO:*** la persona sabe leer y escribir.
-	  
-	  1. Sí
-	  
-	  2. No
-	  
-- ***ESTUDIA:***(?)
-
-	  1. Sí
-	  
-	  2. No
-	  
-- ***NIVEL EDUCATIVO:*** (?)
-	  
-	  1. Ninguno
+	  1. Ninguno 
 	  
 	  2. Preescolar
 	  
-	  3. Básica primaría (1º - 5º)
+	  3. Básica primaria (1°-5°)
 	  
-	  4. Básica secundaría (6º - 9º)
+	  4. Básica secundaria (6°-9°)
 	  
-	  5. Media (10º--13º)
+	  5. Media (10°-13°)
 	  
-	  6. Técnica incompleta
+	  6. Técnico sin título
 	  
-	  7. Técnica incompleta
+	  7. Técnico con título
 	  
-	  8. Tecnología incompleta
+	  8. Tecnológico sin título
 	  
-	  9. Tecnología completa
+	  9. Tecnológico con título
 	  
-	  10. Pregrado universitario incompleto
+	  10. Universitario sin título
 	  
-	  11. Pregrado universitario completo
+	  11. Universitario con título
 	  
-	  12. Postgrado incompleto
+	  12. Postgrado sin título
 	  
-	  13. Postgrado completo
+	  13. Postgrado con título
 	  
-- ***PÚBLICO - PRIVADO:*** el establecimiento educativo es público o privado.
+	  14. Desconocido
+
+- ***PÚBLICO_PRIVADO_Jefe / PÚBLICO_PRIVADO_Cónyuge:*** hace referencia a si el establecimiento en donde estudia la persona se cataloga como público o privado, así:
 	  
-	  1. Oficial/público
+	  1. Público
 	  
-	  2. No oficial/privado
+	  2. Privado
 	  
-- ***LEE:*** cuenta con un pasatiempos como leer.
+	  3. Desconocido/No aplica
+	 
+- ***ACTIVIDAD_Jefe / ACTIVIDAD_Cónyuge:*** describe la actividad a la que se dedicó la mayor parte del tiempo el jefe del hogar y su conyugé la semana pasada a la recolección de los datos.Dentro de las categorías se encuentran: 
 	  
-	  1. Oficial/público
+	  1. Trabajando 
 	  
-	  2. No oficial/privado
+	  2. Buscando trabajo
 	  
-- ***ACTIVIDAD:*** actividad en la que ocupa su tiempo.
-	  
-	  1. Trabajo
-	  
-	  2. Busqueda de trabajo
-	  
-	  3. Estudiante
+	  3. Estudiando
 	  
 	  4. Oficios del hogar
 	  
-	  5. Incapacidad permanente para trabajar
+	  5. Incapacitado
 	  
-	  6. Otra
+	  6. Otro
 	  
-- ***SUBSIDIO:*** nombre del subsidio que recibe
+- ***PENSIÓN_Jefe / PENSIÓN_Cónyuge:*** hace referencia a si la persona se encuentra cotizando en la actualidad en un fondo de pensiones. Se puede obtener que: 
+	  
+	  1. Sí 
+	  
+	  2. No
+	  
+	  3. Ya está pensionado
+	  
+- ***RECIBE_INGRESO_Jefe / RECIBE_INGRESO_Cónyuge:*** describe si la persona recibió algún ingreso por concepto de pensión de jubilación, sustitución pensional, invalidez o vejez durante los últimos 12 meses. Se categoriza en: 
+	  
+	  1. Sí 
+	  
+	  2. No
+	  
+	  9. No sabe/no responde
 
-- ***DINERO SUBSIDIO:*** dinero que recibe del subsidio
+- ***RECIBE_INGRESO_ALIMENTO_Jefe / RECIBE_INGRESO_ALIMENTO_Cónyuge:***	describe si la prsona recibió algún ingreso para el sostenmiento de hijos menores de 18 años en el último mes. Se categoriza en: 
+	  
+	  1. Sí 
+	  
+	  2. No
+	  
+	  9. No sabe/no responde
 
-- ***SUBSIDIOS: ***
+- ***RECIBE_INGRESO_BIENES_Jefe / RECIBE_INGRESO_BIENES_Cónyuge:*** descibe si la persona recibió ingresos por concepto de alguna propiedad (arriendo de casas, apartamentos, fincas, lotes, vehículos, maquinaría, equipos) en el último mes, así: 
 	  
-	  1. Si recibe subsidio
+	  1. Sí 
 	  
-	  2. No recibe subsidio
+	  2. No
 	  
-- ***NÚMERO DE CARGAS EN LA LAVADORA:*** número de veces que lava ropa a la semana. Cuando la familia no tiene lavadora, se deb especificar.
+	  9. No sabe/no responde
 
-- ***TAMAÑO DE LA NEVERA:***
-	  
-	  1. Pequeña
-	  
-	  2. Mediana
-	  
-	  3. Grande
-	  
-- ***HORAS PC:*** número de horas que usa el pc.
-
-- ***PAGO ENERGÍA:*** dinero pago energia mes pasado. ()
-
-- ***PAGO GAS:*** dinero pago gas mes pasado.
+- ***HIJOS_x / HIJOS_y:*** es la variable respuesta, y se define como la cantidad de hijos en un hogar. Es una variable numérica discreta y varía en el rango de 0 a 11.
 
 ## Análisis descriptivo
 
 ## Modelo propuesto
-
-## Consideraciones
-- Hogares en los que solo hay 1 familia
 
 ## Resultados del modelo
 

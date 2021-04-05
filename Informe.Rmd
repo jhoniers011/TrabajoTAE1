@@ -33,12 +33,31 @@ Dichos factores se pueden englobar en 4 aspectos demográficos, que son:
 ## Fuentes de información y segmentación de variables
 Para el presente trabajo se tomó la base de datos correspondiente a la encuesta nacional de calidad de vida 2018-2019, proporcionada por el Departamento Administrativo Nacional de Estadística (DANE) por medio del archivo nacional de datos (ANDA) . De allí, se usaron 9 tablas, que corresponden a: Datos de la vivienda , servicios del hogar, características y composición del hogar, salud, educación, fuerza de trabajo, condiciones de vida del hogar y tenencia de bienes, y uso energético del hogar.
 
-De las más de 150 variables contenidas en el total de datos, se hizo una primera elección teniendo encuenta las variables más relevantes que estuvieran bien categorizadas y que no tuvieran un registro de frases y/o letras y a su vez, que no existiera una gran cantidad de datos vacios para evitar una reducción drástica de la base de datos. Finalmente, se obtuvo una tabla final con $48$ variables, que se procedieron a ser analizadas estadísticamente para llevar a cabo una segunda selección. 
+De las más de 150 variables contenidas en el total de datos, se hizo una primera elección teniendo encuenta las siguientes consideraciones:
+
+- Se tomaron las variables que podrían afectar de manera significativa la predicción del modelo sobre el número de hijos por hogar, teniendo en cuenta los factores asociados a la natalidad consultados en la literatura y mencionados anteriormente.
+- Se tomaron las variables que estuvieran bien categorizadas y que no tuveran registro de frases y/o letras.
+- Se tomaron variables que no tuvieran una gran cantidad de datos vacios para evitar una reducción drástica de la base de datos.
+
+### Base de datos
+
+Con las consideraciones mencionadas se obtiene una primera base de datos filtrada. Sin embargo, se observan 2 inconvenientes principales que debían ser solucionados para evitar futuros obstáculos con el modelo:
+
+- Para variables aparentemente importantes según la literatura, como por ejemplo si el jefe del hogar vive o no con su cónyuge, habían respuestas vacías.
+  - La solución que se plateó fue llevar dichas respuestas vacías a una respuesta negativa. En caso de que esta no existiera, se creaba una nueva respuesta dónde se consideraba desconocimiento por parte de la persona, es decir, no sabe/no responde. 
+  
+- Para el mismo hogar, se tenían dos filas de datos que debían apuntar a la misma predicción, pues se trataban de respuestas dadas por el jefe del hogar y el cónyuge del jefe del hogar.
+  - La solución que se planteó fue crear nuevas variables especificando si se trataba del jefe del hogar o del cónyuge, esto para el mismo hogar. Esto ocasionó que se duplicaran la cantidad de variables, pero mantuvo la información relevante para cada familia.
+  Sin embargo, al hacer esto ____________________________explicacion bien mela_________________
+  
+Con lo anterior, se legó a una tabla final con $78$ variables, que se procedieron a ser analizadas estadísticamente para llevar a cabo una segunda selección. 
 
 ## Descripción de variables
+
+
 - ***DIRECTORIO:*** número utilizado para identificar cada uno de los hogares.
 
-- ***ID:*** hace referencia al tipo de documento de identidad que poseen los integrantes del hogar. La variable se encuentra categorizada de la siguiente manera:
+- ***ID_Jefe / ID_Cónyuge:*** hace referencia al tipo de documento de identidad que pose el jefe del hogar y el cónyuge del jefe del hogar. La variable se encuentra categorizada de la siguiente manera:
 	  
 	  1. Registro civil de nacimiento
 	  
@@ -50,13 +69,13 @@ De las más de 150 variables contenidas en el total de datos, se hizo una primer
 	  
 	  5. No posee ID
 	  
-- ***SEXO:*** se refiere a la categorización biológica de la persona, así:
+- ***SEXO_Jefe / SEXO_Cónyuge:*** se refiere a la categorización biológica del jefe del hogar y del cónyuge del jefe del hogar. Así:
 	  
 	  1. Hombre
 	  
 	  2. Mujer
 	  
-- ***EDAD:*** cantidad de años de la persona del hogar.
+- ***EDAD_Jefe / EDAD_Cónyuge:*** cantidad de años del jefe del hogar y del cónyuge del jefe del hogar.
 
 - ***PARENTESCO:*** hace referencia al nivel de mando en el hogar, se encuentra categorizada así:
 	  
@@ -64,33 +83,229 @@ De las más de 150 variables contenidas en el total de datos, se hizo una primer
 	  
 	  2. Pareja del jefe de hogar
 	  
-- ***ESTADO CIVIL:***se refiere a la situación familiar provenientes de las relaciones de pareja. Entre las categorías se encuentran:
+- ***ESTADO_CIVIL:***se refiere a la situación familiar provenientes de las relaciones de pareja. Entre las categorías se encuentran:
 	  
 	  1. No casado(a) y vive con la pareja hace menos de 2 años
 	  
 	  2. No casado(a) y vive con la pareja hace más de 2 años
 	  
-	  3. Viudo(a)
-	  
-	  4. Divorciado(a)
-	  
-	  5. Soltero(a)
-	  
 	  6. Casado(a)
 	  
-- ***CÓNYUGE:*** se refiere a la presencia de la pareja del jefe en el hogar.
-	  
-	  1. Sí
-	  
-	  2. No
-	  
-- ***PADRE:*** expone si el padre de los hijos vive en el hogar a través de las siguientes categorías:
+- ***PADRE_VIVE_Jefe / PADRE_VIVE_Cónyuge:*** expone si el padre del jefe o del cónyuge del jefe vive en el hogar, a través de las siguientes categorías:
 	  
 	  1. Sí
 	  
 	  2. No
 	  
 	  3. Fallecido
+
+- ***MADRE_VIVE_Jefe / MADRE_VIVE_Cónyuge:*** expone si la madre del jefe o del cónyuge del jefe vive en el hogar, a través de las siguientes categorías:
+	  
+	  1. Sí
+	  
+	  2. No
+	  
+	  3. Fallecida
+
+- ***CULTURA_Jefe / CULTURA_Cónyuge:*** hace referencia al reocnocimiento del jefe del hogar o del cónyuge del jefe del hogar, segun su pueblo o rasgos físicos, a alguna de las siguientes categorías/comunidades:
+	  
+	  1. Indígena
+	  
+	  2. Gitano(a) (Rom)
+	  
+	  3. Raizal del archipiélago de San Andrés, Providencia y Santa Catalina.
+	  
+	  4. Palenquero(a) de San Basilio.
+	  
+	  5. Negro(a), mulato(a) (afrodescendiente), afrocolombiano(a).
+	  
+	  6. Ninguno de los anteriores.
+
+- ***CAMPESINO_Jefe / CAMPESINO_Cónyuge:*** hace referencia a si el jefe del hogar o del cónyuge del jefe del hogar se consideran campesinos:
+	  
+	  1. Sí
+	  
+	  2. No
+
+-	***SATISFACCION VIDA Jefe / SATISFACCION VIDA Cónyuge:** se refiere al nivel de satisfacción del jefe del hogar o del cónyuge del jefe del hogar con su vida actual, en una escala del 0 al 10, donde 0 significa que se siente "totalmente insatisfecho" y 10 significa que se siente "totalmente satisfecho".
+
+-	***SATISFACCION ECONÓMICA Jefe / SATISFACCION ECONÓMICA Cónyuge:** se refiere al nivel de satisfacción del jefe del hogar o del cónyuge del jefe del hogar con su economía actual, en una escala del 0 al 10, donde 0 significa que se siente "totalmente insatisfecho" y 10 significa que se siente "totalmente satisfecho".
+
+-	***SATISFACCION SALUD Jefe / SATISFACCION SALUD Cónyuge:** se refiere al nivel de satisfacción del jefe del hogar o del cónyuge del jefe del hogar con su salud actual, en una escala del 0 al 10, donde 0 significa que se siente "totalmente insatisfecho" y 10 significa que se siente "totalmente satisfecho".
+
+-	***SATISFACCION TRABAJO Jefe / SATISFACCION TRABAJO Cónyuge:** se refiere al nivel de satisfacción del jefe del hogar o del cónyuge del jefe del hogar con su trabajo actual, en una escala del 0 al 10, donde 0 significa que se siente "totalmente insatisfecho" y 10 significa que se siente "totalmente satisfecho".
+
+-	***FELICIDAD_Jefe / FELICIDAD_Cónyuge:** hace referencia a qué tan feliz se sintió el jefe del hogar o el cónyuge del jefe del hogar, en el último día, en una escala del 0 al 10, donde 0 significa que no experimento "para nada" esa sensación y 10 significa que experimentó "todo el tiempo" esa sensación.
+
+-	***TRISTEZA_Jefe / TRISTEZA_Cónyuge:** hace referencia a qué tan triste se sintió el jefe del hogar o el cónyuge del jefe del hogar, en el último día, en una escala del 0 al 10, donde 0 significa que no experimento "para nada" esa sensación y 10 significa que experimentó "todo el tiempo" esa sensación.
+
+-	***ESCALÓN VIDA Jefe / ESCALÓN VIDA Cónyuge:** hace referencia al momento de la vida en que se encuentra el jefe del hogar o el cónyuge del jefe del hogar, imaginando una escalera que va del 0 al 10, donde 0 es el escalón más bajo y 10 el escalón más alto. El más alto representa la mejor vida que se podría tener y el más bajo, la peor.
+
+- ***HIJOS_x / HIJOS_y:*** ¿? la cantidad de hijos? ¿Parentesco = 3?
+
+- ***REGIÓN:***se refiere al lugar del país en donde se encuentra el hogar estudiado. Se clasifica así:
+	  
+	  1. Región Caribe
+	  
+	  2. Oriental(?)
+	  
+	  3. Central (?)
+	  
+	  4. Región Pacífico 
+	  
+	  5. Bogotá
+	  
+	  6. Antioquia
+	  
+	  7. Valle del Cauca
+	  
+	  8. San Andrés Islas
+	  
+	  9. Orinoquia, Amazonía
+
+- ***UBICACIÓN:*** se refiere al lugar donde se encuentra asentada la vivienda. Se clasifica en:
+
+	  1. Cabecera urbana
+	  
+	  2. Corregimiento, Área rural
+
+- ***TIPO DE VIVIENDA:***clasifica el tipo de vivienda de la siguiente manera:
+	  
+	  1. Casa
+	  
+	  2. Apartamento
+	  
+	  3. Habitación unipersonal
+	  
+	  4. Casa indígena
+	  
+	  5. Otro (carpa, contenedor, vagón, etc.)
+
+- ***MATERIAL EXTERIOR:***especifica el material predominante en las paredes exteriores del hogar, dentro de las siguientes categorías:
+	  
+	  1. Bloque, ladrillo, piedra, madera pulida
+	  
+	  2. Adobe
+	  
+	  3. Bahareque revocado
+	  
+	  4. Bahareque sin revocar
+	  
+	  5. madera, tabla, tablón
+	  
+	  6. Material prefabricado
+	  
+	  7. Guadua, caña
+	  
+	  8. Tela, latas, desechos, plástico
+	  
+	  9. Sin paredes
+	  
+- ***MATERIAL PISO:***especifica el material predominante de los pisos del hogar, dentro de las siguientes categorías:
+	  
+	  1. Alfombra, tapete
+	  
+	  2. Madera pulida
+	  
+	  3. Mármol
+	  
+	  4. Baldosa, tableta, ladrillo
+	  
+	  5. Madera, tabla, tablón
+	  
+	  6. Cemento, gravilla
+	  
+	  7. Tierra, arena
+	  
+- ***MATERIAL TECHO:***especifica el material predominante del techo o cubierta del hogar, dentro de las siguientes categorías:
+	  
+	  1. Plancha de concreto, cemento
+	  
+	  2. Tejas de barro
+	  
+	  3. Tejas de asbesto
+	  
+	  4. Teja metálica
+	  
+	  5. Teja plástica
+	  
+	  6. Paja, palma
+	  
+	  7. Material de desecho (cartón, latas, telas, entre otros)
+
+- ***ESTRATO:***clasificación de la vivienda según su estrato socioeconómico, así:
+	  
+	  1. Bajo-Bajo
+	  
+	  2. Bajo
+	  
+	  3. Medio-Bajo
+	  
+	  4. Medio
+	  
+	  5. Medio-alto
+	  
+	  6. Alto
+
+- ***NÚMERO DE CUARTOS:***incluyendo la sala y el comedor, representa el número de cuartos de los que dispone el hogar
+
+- ***NÚMERO DE CUARTOS PARA DORMIR:***del número de cuartos totales, en cuántos de ellos duermen las personas del hogar
+
+- ***INGRESO HOGAR:***se refiere al ingreso mensual total del hogar
+
+- ***INGRESO PERCÁPITA:***se refiere al ingreso per-cápita del hogar
+
+- ***CANTIDAD PERSONAS:***se refiere a la cantidad del personas en el hogar
+
+- ***TIENE EPS Jefe / TIENE EPS Cónyuge:*** hace referencia a si el jefe del hogar o el cónyuge del jefe del hogar están afiliados (cotizante o beneficiario) a alguna entidad de seguridad social en salud - EPS:
+	  
+	  1. Sí
+	  
+	  2. No
+	  
+	  9. No sabe / no informa
+
+- ***PERCEPCIÓN_Jefe / PERCEPCIÓN_Cónyuge:*** hace referencia a la calificación que el jefe del hogar o el cónyuge del jefe del hogar dan sobre el servicio de la entidad de seguridad social en salud a la que pertenece:
+	  
+	  1. Muy buena
+	  
+	  2. Buena
+	  
+	  3. Mala
+	  
+	  4. Muy mala
+	  
+	  5. No sabe 
+	  
+	  9. No informa
+
+- ***PREPAGADA_Jefe / PREPAGADA_Cónyuge:*** hace referencia a si el jefe del hogar o el cónyuge del jefe del hogar se encuentran afiliados a un plan complementario de salud:
+	  
+	  1. Si
+	  
+	  2. No
+
+- ***ESTADO SALUD Jefe / ESTADO SALUD Cónyuge:*** hace referencia al estado general de salud del jefe del hogar o del cónyuge del jefe del hogar, así:
+	  
+	  1. Muy bueno
+	  
+	  2. Bueno
+	  
+	  3. Regular
+	  
+	  4. Malo
+
+- ***ENFERMEDAD GRAVE Jefe / ENFEMERDAD GRAVE Cónyuge:*** hace referencia a si le han diagnostícado una enfermedad crónica (enfermedad de larga duración y prolongados tratamientos como: enfermedades cardiovasculares-hipertensión, asma, bronquitis crónica, gastritis, lupus, cáncer, gota, leucemia, diabetes, etc) al jefe del hogar o al cónyuge del jefe del hogar:
+	  
+	  1. Si
+	  
+	  2. No
+
+
+
+## ________ACÁ QUEDÉ________
+
+
 	  
 - ***NIVEL EDUCATIVO PADRE:*** se obtiene el nivel educativo más alto que ha alcanzado el padre. Dicho nivel debe estar avalado por medio de una certificación o constancia.
 	  
@@ -121,6 +336,8 @@ De las más de 150 variables contenidas en el total de datos, se hizo una primer
 	  2. No
 	  
 	  3. Fallecido
+
+
 	  
 - ***NIVEL EDUCATIVO PADRE:*** se obtiene el nivel educativo más alto que ha alcanzado la madre. Dicho nivel debe estar avalado por medio de una certificación o constancia.
 	  
@@ -186,47 +403,15 @@ De las más de 150 variables contenidas en el total de datos, se hizo una primer
 
 - ***HIJOS:*** es la variable respuesta, y se define como la cantidad de hijos en un hogar. Es una variable numérica discreta y varía en el rango de 1 a 11.
 
-- ***SECTORES:***se refiere al lugar del país en donde se encuentra el hogar estudiado. Se clasifica así:
-	  
-	  1. Región Caribe
-	  
-	  2. Oriental(?)
-	  
-	  3. Central (?)
-	  
-	  4. Región Pacífico 
-	  
-	  5. Bogotá
-	  
-	  6. Antioquia
-	  
-	  7. Valle del Cauca
-	  
-	  8. San Andrés Islas
-	  
-	  9. Orinoquia, Amazonía
-	  
-- ***CLASE:*** se refiere al lugar donde se encuentra asentada la vivienda. Se clasifica en:
 
-	  1. Cabecera urbana
 	  
-	  2. Área rural
-	  
-- ***TIPO DE VIVIENDA:***se clasifica de la siguiente manera:
-	  
-	  1. Casa
-	  
-	  2. Apartamento
-	  
-	  3. Habitación unipersonal
-	  
-	  4. Casa indígena
-	  
-	  5. Otro (carpa, contenedor, vagón, etc.)
 
-- ***NÚMERO DE CUARTOS:*** 
+	  
 
-- ***NÚMERO DE CUARTOS PARA DORMIR:***
+
+
+
+
 
 - ***INGRESO HOGAR:*** es la cantidad de dinero que recibe el hogar en total, sumando los ingresos individuales de las personas pertenecientes.
 

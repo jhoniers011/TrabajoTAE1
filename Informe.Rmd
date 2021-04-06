@@ -422,23 +422,397 @@ De las $70$ variables de la base de datos, se tienen $64$ variables categóricas
 **Sexo_Jefe/Sexo_Conyuge**
 ```{r}
 library(knitr)
-kable(table(datos$Sexo_Jefe))
-kable(table(datos$Sexo_Conyuge))
+kable(table(datos$Sexo_Jefe), caption ="Sexo del Jefe del hogar")
+kable(table(datos$Sexo_Conyuge),caption ="Sexo del conyugé del hogar")
 par(mfrow=c(1,2))
-barplot(table(datos$Sexo_Jefe))
-barplot(table(datos$Sexo_Conyuge))
+barplot(table(datos$Sexo_Jefe), col = c("deepskyblue4","blueviolet"), main = "Sexo Jefe")
+barplot(table(datos$Sexo_Conyuge), col = c("deepskyblue4","blueviolet"), main = "Sexo Conyugé")
+```
+
+**ESTADO_CIVIL_Jefe/ESTADO_CIVIL_Conyuge**
+```{r}
+kable(table(datos$Estado_civil_Jefe), caption ="Estado civil del Jefe del hogar/conyugé")
+par(mfrow=c(1,1))
+barplot(table(datos$Estado_civil_Jefe), col = c("bisque","aquamarine","coral"), main = "Estado civil Jefe/conyugé")
+```
+**PADRE_VIVE_Jefe/PADRE_VIVE_Cónyuge**
+```{r}
+kable(table(datos$Padre_vive_Jefe), caption ="Padre vive del Jefe del hogar")
+kable(table(datos$Padre_vive_Conyuge),caption ="Padre vive del conyugé del hogar")
+par(mfrow=c(1,2))
+barplot(table(datos$Padre_vive_Jefe), col = c("darkred","gold", "darkseagreen"), main = "Padre vive Jefe")
+barplot(table(datos$Padre_vive_Conyuge), col = c("darkred","gold","darkseagreen"), main = "Padre vive Conyugé")
 ```
 
 
+**MADRE_VIVE_Jefe / MADRE_VIVE_Cónyuge**
+```{r}
+kable(table(datos$Madre_vive_Jefe), caption ="Madre vive del Jefe del hogar")
+kable(table(datos$Madre_vive_Conyuge),caption ="Madre vive del conyugé del hogar")
+par(mfrow=c(1,2))
+barplot(table(datos$Madre_vive_Jefe), col = c( "darkseagreen", "darkred","gold"), main = "Madre vive Jefe")
+barplot(table(datos$Madre_vive_Conyuge), col = c("darkseagreen", "darkred","gold"), main = "Madre vive Conyugé")
+```
+
+
+**CULTURA_Jefe / CULTURA_Cónyuge**
+```{r}
+kable(table(datos$Cultura_Jefe), caption ="Cultura del Jefe del hogar")
+kable(table(datos$Cultura_Conyuge),caption ="Cultura del conyugé del hogar")
+par(mfrow=c(1,2))
+barplot(table(datos$Cultura_Jefe), col = c( "lightcyan", "lightpink","lightgreen"), main = "Cultura del Jefe")
+barplot(table(datos$Cultura_Conyuge), col = c("lightcyan", "lightpink","lightgreen"), main = "Cultura del Conyugé")
+```
+
+
+**CAMPESINO_Jefe / CAMPESINO_Cónyuge**
+```{r}
+kable(table(datos$Campesino_Jefe), caption ="Campesino Jefe del hogar")
+kable(table(datos$Campesino_Conyuge),caption ="Campesinos conyugé del hogar")
+par(mfrow=c(1,2))
+barplot(table(datos$Campesino_Jefe), col = c( "peru", "plum","seashell"), main = "Campesino Jefe")
+barplot(table(datos$Campesino_Conyuge), col = c("peru", "plum","seashell"), main = "Campesino Conyugé")
+```
+
+
+**SATISFACCIÓN_VIDA_Jefe / SATISFACCIÓN_VIDA_Cónyuge**
+```{r}
+kable(table(datos$Satisfaccion_vida_Jefe), caption ="Satisfacción con la vida Jefe del hogar")
+kable(table(datos$Satisfaccion_vida_Conyuge),caption ="Satisfacción con la vida del conyugé del hogar")
+par(mfrow=c(2,1))
+barplot(table(datos$Satisfaccion_vida_Jefe), col = "steelblue", main = "Satisfacción con la vida Jefe")
+barplot(table(datos$Satisfaccion_vida_Conyuge), col ="tan1", main = "Satisfacción con la vida Conyugé")
+```
+
+
+**SATISFACCIÓN_ECONÓMICA_Jefe / SATISFACCIÓN_ECONÓMICA_Cónyuge**
+```{r}
+kable(table(datos$Satisfaccion_economica_Jefe), caption ="Satisfacción con la economía Jefe del hogar")
+kable(table(datos$Satisfaccion_economica_Conyuge),caption ="Satisfacción con la economía del conyugé del hogar")
+par(mfrow=c(2,1))
+barplot(table(datos$Satisfaccion_economica_Jefe), col = "seagreen4", main = "Satisfacción con la economía Jefe", xlim = c(0,11.8))
+barplot(table(datos$Satisfaccion_economica_Conyuge), col ="thistle1", main = "Satisfacción con la economía Conyugé", xlim = c(0,11.8))
+```
+
+
+**SATISFACCIÓN_SALUD_Jefe / SATISFACCIÓN_SALUD_Cónyuge**
+```{r}
+kable(table(datos$Satisfaccion_salud_Jefe), caption ="Satisfacción con la salud Jefe del hogar")
+kable(table(datos$Satisfaccion_salud_Conyuge),caption ="Satisfacción con la salud del conyugé del hogar")
+par(mfrow=c(2,1))
+barplot(table(datos$Satisfaccion_salud_Jefe), col = "orangered", main = "Satisfacción con la salud Jefe")
+barplot(table(datos$Satisfaccion_salud_Conyuge), col ="rosybrown1", main = "Satisfacción con la salud Conyugé")
+```
+
+
+**SATISFACCIÓN_TRABAJO_Jefe / SATISFACCIÓN_TRABAJO_Cónyuge**
+```{r}
+kable(table(datos$Satisfaccion_trabajo_Jefe), caption ="Satisfacción con el trabajo Jefe del hogar")
+kable(table(datos$Satisfaccion_trabajo_Conyuge),caption ="Satisfacción con el trabajo del conyugé del hogar")
+par(mfrow=c(2,1))
+barplot(table(datos$Satisfaccion_trabajo_Jefe), col = "navy", main = "Satisfacción con el trabajo Jefe")
+barplot(table(datos$Satisfaccion_trabajo_Conyuge), col ="mediumblue", main = "Satisfacción con el trabajo Conyugé")
+```
+
+
+**FELICIDAD_Jefe / FELICIDAD_Cónyuge**
+```{r}
+kable(table(datos$Felicidad_Jefe), caption ="Felicidad del Jefe del hogar")
+kable(table(datos$Felicidad_Conyuge),caption ="Felicidad del conyugé del hogar")
+par(mfrow=c(2,1))
+barplot(table(datos$Felicidad_Jefe), col = "lavenderblush", main = "Felicidad del Jefe")
+barplot(table(datos$Felicidad_Conyuge), col ="indianred4", main = "Felicidad del Conyugé")
+```
+
+
+**TRISTEZA_Jefe / TRISTEZA_Cónyuge**
+```{r}
+kable(table(datos$Tristeza_Jefe), caption ="Tristeza del Jefe del hogar")
+kable(table(datos$Tristeza_Conyuge),caption ="Tristeza del conyugé del hogar")
+par(mfrow=c(2,1))
+barplot(table(datos$Tristeza_Jefe), col = "mediumpurple4", main = "Tristeza del Jefe")
+barplot(table(datos$Tristeza_Conyuge), col ="lightslateblue", main = "Tristeza del Conyugé")
+```
+
+
+**ESCALÓN_VIDA_Jefe / ESCALÓN_VIDA_Cónyuge**
+```{r}
+kable(table(datos$Escalon_vida_Jefe), caption ="Escalón de vida del Jefe del hogar")
+kable(table(datos$Escalon_vida_Conyuge),caption ="Escalón de vida del conyugé del hogar")
+par(mfrow=c(2,1))
+barplot(table(datos$Escalon_vida_Jefe), col = "midnightblue", main = "Escalón de vida del Jefe")
+barplot(table(datos$Escalon_vida_Conyuge), col ="oldlace", main = "Escalón de vida del Conyugé")
+```
+
+
+**REGIÓN**
+```{r}
+kable(table(datos$REGION), caption ="Región del hogar")
+par(mfrow=c(1,1))
+barplot(table(datos$REGION), col ="lightskyblue", main = "Región del hogar")
+```
+
+
+**UBICACIÓN**
+```{r}
+kable(table(datos$Ubicacion), caption ="Ubicación del hogar")
+par(mfrow=c(1,1))
+barplot(table(datos$Ubicacion), col =c("lightsalmon","mediumorchid1"), main = "Ubicación del hogar")
+```
+
+
+**Tipo_Vivienda**
+```{r}
+kable(table(datos$Tipo_vivienda), caption ="Tipo de vivienda")
+par(mfrow=c(1,1))
+barplot(table(datos$Tipo_vivienda), col = "yellow", main = "Tipo de vivienda")
+```
+
+
+**Material_Exterior**
+```{r}
+kable(table(datos$Material_exterior), caption ="Material del exterior de la vivienda")
+par(mfrow=c(1,1))
+barplot(table(datos$Material_exterior), col = "peachpuff", main = "Material del exterior de la vivienda")
+```
+
+
+**Material_Piso**
+```{r}
+kable(table(datos$Material_piso), caption ="Material del piso de la vivienda")
+par(mfrow=c(1,1))
+barplot(table(datos$Material_piso), col = "black", main = "Material del piso de la vivienda")
+```
+
+
+**Material_Techo**
+```{r}
+kable(table(datos$Material_techo), caption ="Material del techo de la vivienda")
+par(mfrow=c(1,1))
+barplot(table(datos$Material_techo), col = "seagreen1", main = "Material del techo de la vivienda")
+```
+
+
+**Estrato**
+```{r}
+kable(table(datos$Estrato), caption ="Estrato de la vivienda")
+par(mfrow=c(1,1))
+barplot(table(datos$Estrato), col = "royalblue2", main = "Estrato de la vivienda")
+```
+
+
+**TIENE_EPS_Jefe / TIENE_EPS_Cónyuge**
+```{r}
+kable(table(datos$Tiene_EPS_Jefe), caption ="Tiene EPS Jefe")
+kable(table(datos$Tiene_EPS_Conyuge), caption ="Tiene EPS Cónyuge")
+par(mfrow=c(1,2))
+barplot(table(datos$Tiene_EPS_Jefe), col = c("red4", "rosybrown1", "sandybrown"), main = "Tiene EPS Jefe")
+barplot(table(datos$Tiene_EPS_Conyuge), col = c("red4", "rosybrown1", "sandybrown"), main = "Tiene EPS Cónyuge")
+```
+
+
+**PERCEPCIÓN_Jefe / PERCEPCIÓN_Cónyuge**
+```{r}
+kable(table(datos$Percepcion_Jefe), caption ="Percepción del Jefe")
+kable(table(datos$Percepcion_Conyuge), caption ="Percepción del Cónyuge")
+par(mfrow=c(2,1))
+barplot(table(datos$Percepcion_Jefe), col = "papayawhip", main = "Percepción del Jefe")
+barplot(table(datos$Percepcion_Conyuge), col = "paleturquoise1", main = "Percepción del Cónyuge")
+```
+
+
+**PREPAGADA_Jefe / PREPAGADA_Cónyuge**
+```{r}
+kable(table(datos$Prepagada_Jefe), caption ="Prepagada del Jefe")
+kable(table(datos$Prepagada_Conyuge), caption ="Prepagada del Cónyuge")
+par(mfrow=c(1,2))
+barplot(table(datos$Prepagada_Jefe), col = c("paleturquoise4","palevioletred"), main = "Medicina prepagada del Jefe")
+barplot(table(datos$Prepagada_Conyuge), col = c("paleturquoise4","palevioletred"), main = "Medicina prepagada del Cónyuge")
+```
+
+
+**ESTADO_SALUD_Jefe / ESTADO_SALUD_Cónyuge**
+```{r}
+kable(table(datos$Estado_salud_Jefe), caption ="Estado de salud del Jefe")
+kable(table(datos$Estado_salud_Conyuge), caption ="Estado de salud del Cónyuge")
+par(mfrow=c(2,1))
+barplot(table(datos$Estado_salud_Jefe), col = "purple4", main = "Estado de salud del Jefe")
+barplot(table(datos$Estado_salud_Conyuge), col = "powderblue", main = "Estado de salud del Cónyuge")
+```
+
+
+**ENFERMEDAD_GRAVE_Jefe / ENFERMEDAD_GRAVE_Cónyuge**
+```{r}
+kable(table(datos$Enfermedad_grave_Jefe), caption ="Enfermedad grave Jefe")
+kable(table(datos$Enfermedad_grave_Conyuge), caption ="Enfermedad grave Cónyuge")
+par(mfrow=c(1,2))
+barplot(table(datos$Enfermedad_grave_Jefe), col =c("orange","blue"), main = "Enfermedad grave Jefe")
+barplot(table(datos$Enfermedad_grave_Conyuge), col = c("orange","blue"), main = "Enfermedad grave Cónyuge")
+```
+
+
+**SABE_ESCRIBIR_LEER_Jefe / SABE_ESCRIBIR_LEER_Cónyuge**
+```{r}
+kable(table(datos$Sabe_escribir_leer_Jefe), caption ="Analfabetismo Jefe")
+kable(table(datos$Sabe_escribir_leer_Conyuge), caption ="Analfabetismo Cónyuge")
+par(mfrow=c(1,2))
+barplot(table(datos$Sabe_escribir_leer_Jefe), col =c("mediumseagreen","mediumslateblue"), main = "Sabe leer y escribir Jefe")
+barplot(table(datos$Sabe_escribir_leer_Conyuge), col = c("mediumseagreen","mediumslateblue"), main = "Sabe leer y escribir Cónyuge")
+```
+
+
+**ESTUDIA_Jefe / ESTUDIA_Cónyuge**
+```{r}
+kable(table(datos$Estudia._Jefe), caption ="Estudia Jefe")
+kable(table(datos$Estudia._Conyuge), caption ="Estudia Cónyuge")
+par(mfrow=c(1,2))
+barplot(table(datos$Estudia._Jefe), col =c("mediumvioletred","mediumturquoise"), main = "Estudia Jefe")
+barplot(table(datos$Estudia._Conyuge), col = c("mediumvioletred","mediumturquoise"), main = "Estudia Cónyuge")
+```
+
+
+**NIVEL_EDUCATIVO_Jefe / NIVEL_EDUCATIVO_Cónyuge**
+```{r}
+kable(table(datos$Nivel_educativo_Jefe), caption ="Nivel educativo Jefe")
+kable(table(datos$Nivel_educativo_Conyuge), caption ="Nivel educativo Cónyuge")
+par(mfrow=c(2,1))
+barplot(table(datos$Nivel_educativo_Jefe), col="lightsteelblue1", main = "Nivel educativo Jefe")
+barplot(table(datos$Nivel_educativo_Conyuge), col = "magenta4", main = "Nivel educativo Cónyuge")
+```
+
+
+**PÚBLICO_PRIVADO_Jefe / PÚBLICO_PRIVADO_Cónyuge**
+```{r}
+kable(table(datos$Publico_privado_Jefe), caption ="Público/privado Jefe")
+kable(table(datos$Publico_privado_Conyuge), caption ="Público/privado Cónyuge")
+par(mfrow=c(1,2))
+barplot(table(datos$Publico_privado_Jefe), col=c("lightgoldenrod1","green4","red"), main = "Público/privado Jefe")
+barplot(table(datos$Publico_privado_Conyuge), col = c("lightgoldenrod1","green4","red"), main = "Público/privado Cónyuge")
+```
+**ACTIVIDAD_Jefe / ACTIVIDAD_Cónyuge**
+```{r}
+kable(table(datos$Actividad_Jefe), caption ="Actividad del Jefe")
+kable(table(datos$Actividad_Conyuge), caption ="Actividad del Cónyuge")
+par(mfrow=c(2,1))
+barplot(table(datos$Actividad_Jefe), col="white", main = "Actividad del Jefe")
+barplot(table(datos$Actividad_Conyuge), col = "lightblue1", main = "Actividad del Cónyuge")
+```
+
+
+**PENSIÓN_Jefe / PENSIÓN_Cónyuge**
+```{r}
+kable(table(datos$Pension_Jefe), caption ="Pensión del Jefe")
+kable(table(datos$Pension_Conyuge), caption ="Pensión del Cónyuge")
+par(mfrow=c(1,2))
+barplot(table(datos$Pension_Jefe), col="lemonchiffon", main = "Pensión del Jefe")
+barplot(table(datos$Pension_Conyuge), col = "hotpink4", main = "Pensión del Cónyuge")
+```
+
+
+**RECIBE_INGRESO_Jefe / RECIBE_INGRESO_Cónyuge**
+```{r}
+kable(table(datos$Recibe_ingreso_Jefe), caption ="Recibe ingreso Jefe")
+kable(table(datos$Recibe_ingreso_Conyuge), caption ="Recibe ingreso Cónyuge")
+par(mfrow=c(1,2))
+barplot(table(datos$Recibe_ingreso_Jefe), col="lightgoldenrod", main = "Recibe ingreso Jefe")
+barplot(table(datos$Recibe_ingreso_Conyuge), col = "lemonchiffon3", main = "Recibe ingreso Cónyuge")
+```
+
+
+**RECIBE_INGRESO_ALIMENTO_Jefe / RECIBE_INGRESO_ALIMENTO_Cónyuge**
+```{r}
+kable(table(datos$Recibe_ingreso_alimento_Jefe), caption ="Recibe ingreso alimento Jefe")
+kable(table(datos$Recibe_ingreso_alimento_Conyuge), caption ="Recibe ingreso alimento Cónyuge")
+par(mfrow=c(1,2))
+barplot(table(datos$Recibe_ingreso_alimento_Jefe), col="green4", main = "Recibe ingreso alimento Jefe")
+barplot(table(datos$Recibe_ingreso_alimento_Conyuge), col = "greenyellow", main = "Recibe ingreso alimento Cónyuge")
+```
+
+
+**RECIBE_INGRESO_BIENES_Jefe / RECIBE_INGRESO_BIENES_Cónyuge**
+```{r}
+kable(table(datos$Recibe_ingreso_bienes_Jefe), caption ="Recibe ingreso bienes Jefe")
+kable(table(datos$Recibe_ingreso_bienes_Conyuge), caption ="Recibe ingreso bienes Cónyuge")
+par(mfrow=c(1,2))
+barplot(table(datos$Recibe_ingreso_bienes_Jefe), col="goldenrod1", main = "Recibe ingreso bienes Jefe")
+barplot(table(datos$Recibe_ingreso_bienes_Conyuge), col = "darkolivegreen", main = "Recibe ingreso bienes Cónyuge")
+```
 
 
 ## Modelo propuesto
+Debido a la conformación del equipo de trabajo, donde únicamente dos integrantes poseían el conocimiento suficiente para la realización de otro tipo de modelos que podrían ser o no más eficaces para el reto planteado, dada su naturaleza de ______, como el método de los bosques aleatorios o una regresión Poisson; se escoge el método de los **K-Nearest Neighbors (KNN)** con el fin de lograr un entendimiento total del modelo y de su estructura para todo el grupo.
+
+Aunque este método no es el más eficaz debido a las exigencias computacionales que demanda, se probaron 2 modelos diferentes obtenidos a partir de distintos enfoques, como se explica a continuación:
+
+### Modelo 1:
+Luego de hacer el tratamiento de los datos como se planteaó anteriormente, teniendo en cuenta las variables escogidas, se hace un pequeño filtrado para eliminar las que no poseían relevancia o no aportaban demasiada información, como el directorio del hogar y el ID del jefe o cónyuge del hogar, pues estas se encontraban de manera implícita dentro de otras. Por ejemplo, el tipo de documento de identidad (ID), ya que se podía deducir con la edad de la persona.
+
+```{r eval=FALSE}
+datos <- read.csv("Datos_final.csv", header = TRUE, sep = ",") ## Cargando los datos
+datos <- datos[, -c(1, 2, 47, 64)] ## Eliminando el directorio, el ID del jefe y conyugue e hijos_y, que es igual a la variable respuesta hijos
+datos <- datos[, c(17, 1:16, 18:74)] ## Ordenando la base de datos para que hijos sea la primer columna
+datos <- datos[, -c(4, 6, 25, 47, 49)]
+```
+
+Con lo anterior, se obtiene una tabla de datos con la variable respuesta como la primera columna, la cual corresponde al número de hijos por hogar.
+
+Se procede entonces a realizar la estandarización de las variables para remover las unidaes, debido a que como se trabajó con el método de los **K-Nearest Neighbors (KNN)**, este es suceptible a ellas.
+
+```{r eval=FALSE}
+estandar <- function(x){
+  return((x - min(x)) / (max(x) - min(x)))
+}
+entradas <- as.data.frame(lapply(datos[,2:69], estandar)) ## estandarizar las variables de entrada
+```
+
+Luego, del total de datos, se escoge un porcentaje para entrenamiento y un porcentaje para prueba. Con el fin de evitar overfitting o sobreentrenamiento para el modelo, se decide usar el 90% y el 10% de los datos para cada caso, respectivamente. Por último, se organiza cada una de las particiones con la variable respuesta, para proceder con el entrenamiento del modelo.
+
+```{r eval=FALSE}
+set.seed(123) ## Se fija la semilla
+aleatorio <- sample(1:nrow(datos), size=nrow(datos)*0.9) ## 10% para prueba con el fin de evitar overfitting
+entradas_entre <- entradas[aleatorio, ] ## Se toman los datos de entrada para el entrenamiento
+entradas_prueba <- entradas[-aleatorio, ] ## Se toman los datos de entrada para la prueba
+Hijos <- datos[aleatorio, 1] ## Se coge la fila 1 que es la variable respuesta, para el entrenamiento.
+Hijos_prueba <- datos[-aleatorio, 1] ## Se coge la fila 1 que es la variable respuesta, para la prueba
+datos_entre <- cbind(Hijos, entradas_entre) ## Se concatenan la variable y los datos para obtener el conjunto completo de datos de entrenamiento
+```
+
+Por último, se hace la selección de las variables y el entrenamiento del modelo usando el método de correlación cruzada con ayuda de las funciones **rfe***(Control de eliminación recursiva de variables)* y **rfe***(Eliminación recursiva de características)*.
+
+```{r eval=FALSE}
+set.seed(123)
+## Control de eliminación recursiva de variables
+cer <- rfeControl(method = "cv",
+                     number = 3,
+                     returnResamp = "all",
+                     functions = caretFuncs,
+                     saveDetails = TRUE)
+
+## Eliminación recursiva de características (Backward)
+model <- rfe(Hijos ~ ., data = datos_entre, ## Modelo saturado
+             sizes = 5:30,
+             method = "knn",
+             trControl = trainControl(method = "cv"),
+             tuneLength = 20,
+             rfeControl = cer)
+```
+
+### Modelo 2:
+### Escogencia del modelo
+
+Para la escogencia del modelo se tuvo en cuenta, más allá de los resultados obtenidos en la predicción, todo el proceso de selección, filtrado de datos y entrenamiento del mismo según las variables significativas. Se observaron entonces los siguientes comportamientos:
+
+- Para el modelo 2, la base de datos usada en el entrenamiento no estaba bien fundamentada, debido a que:
+  - las variables finales que se usaron en el entrenamiento del modelo no estaban fundamentadas en criterios matemáticos, lo que daba paso a una selección final que podía no aportar con información relevante, causando predicciones poco precisas según los datos suministrados.
+  -
 
 ## Resultados del modelo
 
 ## Análisis de resultados
 
 ## Conclusiones
+
+## Aplicación
 
 ## Referencias
 [1]. https://observatoriodefamilia.dnp.gov.co/Documents/Boletines/bolet%C3%ADn-3---observatorio-de-familias.pdf

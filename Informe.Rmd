@@ -417,13 +417,13 @@ datos <- datos[,c(17, 1:16, 18:74)]
 ```
 
 ### Descripción de variables categóricas
-De las $70$ variables de la base de datos, se tienen $64$ variables categóricas, y se realiza el siguiente análisis exploratorio para cada una de ellas
+De las $70$ variables de la base de datos, se tienen $61$ variables categóricas, y se realiza el siguiente análisis exploratorio para cada una de ellas
 
 **Sexo_Jefe/Sexo_Conyuge**
 ```{r}
 library(knitr)
-kable(table(datos$Sexo_Jefe), caption ="Sexo del Jefe del hogar")
-kable(table(datos$Sexo_Conyuge),caption ="Sexo del conyugé del hogar")
+kable(table(datos$Sexo_Jefe, datos$Sexo_Conyuge), caption ="[Jefe]x[Cónyuge]", col.names = c("Hombre","Mujer"),  row.names = TRUE)
+#kable(table(datos$Sexo_Conyuge),caption ="Sexo del conyugé del hogar")
 par(mfrow=c(1,2))
 barplot(table(datos$Sexo_Jefe), col = c("deepskyblue4","blueviolet"), main = "Sexo Jefe")
 barplot(table(datos$Sexo_Conyuge), col = c("deepskyblue4","blueviolet"), main = "Sexo Conyugé")
@@ -479,7 +479,7 @@ barplot(table(datos$Campesino_Conyuge), col = c("peru", "plum","seashell"), main
 ```{r}
 kable(table(datos$Satisfaccion_vida_Jefe), caption ="Satisfacción con la vida Jefe del hogar")
 kable(table(datos$Satisfaccion_vida_Conyuge),caption ="Satisfacción con la vida del conyugé del hogar")
-par(mfrow=c(2,1))
+par(mfrow=c(1,1))
 barplot(table(datos$Satisfaccion_vida_Jefe), col = "steelblue", main = "Satisfacción con la vida Jefe")
 barplot(table(datos$Satisfaccion_vida_Conyuge), col ="tan1", main = "Satisfacción con la vida Conyugé")
 ```
@@ -489,7 +489,7 @@ barplot(table(datos$Satisfaccion_vida_Conyuge), col ="tan1", main = "Satisfacci�
 ```{r}
 kable(table(datos$Satisfaccion_economica_Jefe), caption ="Satisfacción con la economía Jefe del hogar")
 kable(table(datos$Satisfaccion_economica_Conyuge),caption ="Satisfacción con la economía del conyugé del hogar")
-par(mfrow=c(2,1))
+par(mfrow=c(1,1))
 barplot(table(datos$Satisfaccion_economica_Jefe), col = "seagreen4", main = "Satisfacción con la economía Jefe", xlim = c(0,11.8))
 barplot(table(datos$Satisfaccion_economica_Conyuge), col ="thistle1", main = "Satisfacción con la economía Conyugé", xlim = c(0,11.8))
 ```
@@ -499,7 +499,7 @@ barplot(table(datos$Satisfaccion_economica_Conyuge), col ="thistle1", main = "Sa
 ```{r}
 kable(table(datos$Satisfaccion_salud_Jefe), caption ="Satisfacción con la salud Jefe del hogar")
 kable(table(datos$Satisfaccion_salud_Conyuge),caption ="Satisfacción con la salud del conyugé del hogar")
-par(mfrow=c(2,1))
+par(mfrow=c(1,1))
 barplot(table(datos$Satisfaccion_salud_Jefe), col = "orangered", main = "Satisfacción con la salud Jefe")
 barplot(table(datos$Satisfaccion_salud_Conyuge), col ="rosybrown1", main = "Satisfacción con la salud Conyugé")
 ```
@@ -509,7 +509,7 @@ barplot(table(datos$Satisfaccion_salud_Conyuge), col ="rosybrown1", main = "Sati
 ```{r}
 kable(table(datos$Satisfaccion_trabajo_Jefe), caption ="Satisfacción con el trabajo Jefe del hogar")
 kable(table(datos$Satisfaccion_trabajo_Conyuge),caption ="Satisfacción con el trabajo del conyugé del hogar")
-par(mfrow=c(2,1))
+par(mfrow=c(1,1))
 barplot(table(datos$Satisfaccion_trabajo_Jefe), col = "navy", main = "Satisfacción con el trabajo Jefe")
 barplot(table(datos$Satisfaccion_trabajo_Conyuge), col ="mediumblue", main = "Satisfacción con el trabajo Conyugé")
 ```
@@ -519,7 +519,7 @@ barplot(table(datos$Satisfaccion_trabajo_Conyuge), col ="mediumblue", main = "Sa
 ```{r}
 kable(table(datos$Felicidad_Jefe), caption ="Felicidad del Jefe del hogar")
 kable(table(datos$Felicidad_Conyuge),caption ="Felicidad del conyugé del hogar")
-par(mfrow=c(2,1))
+par(mfrow=c(1,1))
 barplot(table(datos$Felicidad_Jefe), col = "lavenderblush", main = "Felicidad del Jefe")
 barplot(table(datos$Felicidad_Conyuge), col ="indianred4", main = "Felicidad del Conyugé")
 ```
@@ -529,7 +529,7 @@ barplot(table(datos$Felicidad_Conyuge), col ="indianred4", main = "Felicidad del
 ```{r}
 kable(table(datos$Tristeza_Jefe), caption ="Tristeza del Jefe del hogar")
 kable(table(datos$Tristeza_Conyuge),caption ="Tristeza del conyugé del hogar")
-par(mfrow=c(2,1))
+par(mfrow=c(1,1))
 barplot(table(datos$Tristeza_Jefe), col = "mediumpurple4", main = "Tristeza del Jefe")
 barplot(table(datos$Tristeza_Conyuge), col ="lightslateblue", main = "Tristeza del Conyugé")
 ```
@@ -539,7 +539,7 @@ barplot(table(datos$Tristeza_Conyuge), col ="lightslateblue", main = "Tristeza d
 ```{r}
 kable(table(datos$Escalon_vida_Jefe), caption ="Escalón de vida del Jefe del hogar")
 kable(table(datos$Escalon_vida_Conyuge),caption ="Escalón de vida del conyugé del hogar")
-par(mfrow=c(2,1))
+par(mfrow=c(1,1))
 barplot(table(datos$Escalon_vida_Jefe), col = "midnightblue", main = "Escalón de vida del Jefe")
 barplot(table(datos$Escalon_vida_Conyuge), col ="oldlace", main = "Escalón de vida del Conyugé")
 ```
@@ -547,9 +547,9 @@ barplot(table(datos$Escalon_vida_Conyuge), col ="oldlace", main = "Escalón de v
 
 **REGIÓN**
 ```{r}
-kable(table(datos$REGION), caption ="Región del hogar")
+kable(table(datos$REGION), caption ="Región del hogar", col.names = c("Región","Frecuencia"))
 par(mfrow=c(1,1))
-barplot(table(datos$REGION), col ="lightskyblue", main = "Región del hogar")
+barplot(table(datos$REGION), main = "Región del hogar", col = "lightskyblue")
 ```
 
 
@@ -615,7 +615,7 @@ barplot(table(datos$Tiene_EPS_Conyuge), col = c("red4", "rosybrown1", "sandybrow
 ```{r}
 kable(table(datos$Percepcion_Jefe), caption ="Percepción del Jefe")
 kable(table(datos$Percepcion_Conyuge), caption ="Percepción del Cónyuge")
-par(mfrow=c(2,1))
+par(mfrow=c(1,1))
 barplot(table(datos$Percepcion_Jefe), col = "papayawhip", main = "Percepción del Jefe")
 barplot(table(datos$Percepcion_Conyuge), col = "paleturquoise1", main = "Percepción del Cónyuge")
 ```
@@ -635,7 +635,7 @@ barplot(table(datos$Prepagada_Conyuge), col = c("paleturquoise4","palevioletred"
 ```{r}
 kable(table(datos$Estado_salud_Jefe), caption ="Estado de salud del Jefe")
 kable(table(datos$Estado_salud_Conyuge), caption ="Estado de salud del Cónyuge")
-par(mfrow=c(2,1))
+par(mfrow=c(1,1))
 barplot(table(datos$Estado_salud_Jefe), col = "purple4", main = "Estado de salud del Jefe")
 barplot(table(datos$Estado_salud_Conyuge), col = "powderblue", main = "Estado de salud del Cónyuge")
 ```
@@ -675,7 +675,7 @@ barplot(table(datos$Estudia._Conyuge), col = c("mediumvioletred","mediumturquois
 ```{r}
 kable(table(datos$Nivel_educativo_Jefe), caption ="Nivel educativo Jefe")
 kable(table(datos$Nivel_educativo_Conyuge), caption ="Nivel educativo Cónyuge")
-par(mfrow=c(2,1))
+par(mfrow=c(1,1))
 barplot(table(datos$Nivel_educativo_Jefe), col="lightsteelblue1", main = "Nivel educativo Jefe")
 barplot(table(datos$Nivel_educativo_Conyuge), col = "magenta4", main = "Nivel educativo Cónyuge")
 ```
@@ -693,7 +693,7 @@ barplot(table(datos$Publico_privado_Conyuge), col = c("lightgoldenrod1","green4"
 ```{r}
 kable(table(datos$Actividad_Jefe), caption ="Actividad del Jefe")
 kable(table(datos$Actividad_Conyuge), caption ="Actividad del Cónyuge")
-par(mfrow=c(2,1))
+par(mfrow=c(1,1))
 barplot(table(datos$Actividad_Jefe), col="white", main = "Actividad del Jefe")
 barplot(table(datos$Actividad_Conyuge), col = "lightblue1", main = "Actividad del Cónyuge")
 ```
@@ -736,6 +736,65 @@ kable(table(datos$Recibe_ingreso_bienes_Conyuge), caption ="Recibe ingreso biene
 par(mfrow=c(1,2))
 barplot(table(datos$Recibe_ingreso_bienes_Jefe), col="goldenrod1", main = "Recibe ingreso bienes Jefe")
 barplot(table(datos$Recibe_ingreso_bienes_Conyuge), col = "darkolivegreen", main = "Recibe ingreso bienes Cónyuge")
+```
+
+
+### Descripción de variables cuantitativas
+De las $70$ variables de la base de datos, se tienen $9$ variables cuantitativas, y se realiza el siguiente análisis exploratorio para cada una de ellas
+
+**EDAD_Jefe / EDAD_Cónyuge**
+```{r}
+kable(summary(datos[,c(3, 46)]),caption="Edad Jefe")
+kable(t(apply(datos[,c(3, 46)],2,sd)), caption="Desviación estandar Edad Jefe/Cónyuge")
+hist(datos$Edad_Jefe, xlab="Edad Jede", ylab="Frecuencia", main="Edad Jefe", col = "darkviolet")
+hist(datos$Edad_Conyuge, xlab="Edad Cónyuge", ylab="Frecuencia", main="Edad Cónyuge", col= "darkturquoise")
+```
+
+**NÚMERO_DE_CUARTOS**
+```{r}
+summary(datos$Num_Cuartos)
+sd(datos$Num_Cuartos)
+table(datos$Num_Cuartos)
+hist(datos$Num_Cuartos, xlab="Número de cuartos", ylab="Frecuencia", main="Número de cuartos", col="goldenrod1")
+```
+
+**NÚMERO_DE_CUARTOS_PARA_DORMIR**
+```{r}
+summary(datos$Num_cuartos_para_dormir)
+sd(datos$Num_cuartos_para_dormir)
+table(datos$Num_cuartos_para_dormir)
+hist(datos$Num_cuartos_para_dormir, xlab="Número de cuartos para dormir", ylab="Frecuencia", main="Número de cuartos", col="darkseagreen1")
+```
+
+**INGRESO_HOGAR**
+```{r}
+summary(datos$Ingreso_hogar)
+sd(datos$Ingreso_hogar)
+hist((datos$Ingreso_hogar)/1e6, xlab="[$]", ylab="Frecuencia", main="Ingreso del hogar", col="lightslateblue")
+```
+
+**INGRESO_PÉRCAPITA_HOGAR**
+```{r}
+summary(datos$Ingreso_percapita)
+sd(datos$Ingreso_percapita)
+hist((datos$Ingreso_percapita)/1e6, xlab="[$]", ylab="Frecuencia", main="Ingreso promedio del hogar por persona", col="indianred1")
+```
+
+
+**CANTIDAD_PERSONAS**
+```{r}
+summary(datos$cantidad_personas)
+sd(datos$cantidad_personas)
+table(datos$cantidad_personas)
+hist(datos$cantidad_personas, xlab="Número de personas", ylab="Frecuencia", main="Cantidad de personas en el hogar", col="sienna1")
+```
+
+**HIJOS**
+```{r}
+summary(datos$Hijos_x)
+sd(datos$Hijos_x)
+table(datos$Hijos_x)
+hist(datos$Hijos_x, xlab="Número de hijos", ylab="Frecuencia", main="Cantidad de hijos en el hogar", col="yellow3")
 ```
 
 

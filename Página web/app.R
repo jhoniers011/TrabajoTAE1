@@ -6,7 +6,7 @@ library(gmodels)
 library(caret)
 library(shinyWidgets)
 library(shinydashboard)
-library(bs4Dash)
+library(shinyLP)
 
 
 
@@ -49,27 +49,89 @@ ui <- dashboardPage(
             border-right-color:#5F5A58;
             border-top-color:#5F5A58;
             }
+            
+            
+            a {
+  background-color: #4B4746;
+  box-shadow: 0 5px 0 darkwhite;
+  color: white;
+  padding: 1em 1.5em;
+  position: relative;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+a:hover {
+  background-color: #777474;
+  cursor: pointer;
+}
+
+a:active {
+  box-shadow: none;
+  top: 5px;
+}
+            
+            #link1 {
+            background-color: #9e6d27;
+            color: #533203;}
+            
+          #link1::before {
+          width: calc(100%);
+          height: calc(100%-14px);
+            position: absolute;
+            left: 0px,
+            top: 5 px,
+            border-top: 2px dashed #5332013;
+            border-bottom: 2px dashed #533203;
+          
+          }
+            
+            
     
                                         ")),
         
             tabItems(
-                tabItem(tabName = "introduccion",
+                tabItem(tabName = "Introduccion",
+                        
+                        jumbotron("Introducción", "La presente aplicación busca predecir el número de hijos en los hogares de la población Colombiana, teniendo en cuenta los datos obtenidos de la encuesta de calidad de vida suministrada por el DANE para el año 2019. Para lograr un correcto funcionamiento de esta, es necesario que proporcione algunos datos personales sobre la situación actual en la que te encuentras dentro de tu hogar.", 
+                                  button = FALSE),
+                        h3("video promocional: "),
                         
                         
-                        bs4Jumbotron(
-                          title = "Welcome to the LEGO Mosaic Maker!",
-                          lead = "This is a Shiny application that lets you convert any picture to a LEGO mosaic directly from the comfort of your web browser!  Once you upload a picture, you can customize many settings.  This app would not be possible without the innovative R scripts created by Ryan Timpe!  Here are links to his excellent blog posts detailing the workflow:"
-                          ,
-                          status = "primary",
-                          btn_name = "App GitHub Repository",
-                          href = "https://gitlab.com/rpodcast/shinylego"
+                        fixedRow(
+                          column(6,
+                        iframe(width = "560", height = "315",
+                               url_link = "https://www.youtube.com/embed/n7jG4kVZ448")),
+                        
+                       
+                         box(title = h3("Integrantes"),
+                            
+                            tags$div(tags$ul(
+                              tags$li(tags$span(h4("Catherine Andrea Córdoba Espinosa"))),
+                              tags$li(tags$span(h4("Santiago Ramírez Zapata"))),
+                              tags$li(tags$span(h4("Carlos Mario Calle González"))),
+                              tags$li(tags$span(h4("Allison Piedrahita García"))),
+                              tags$li(tags$span(h4("Jhonier Santiago Serna Cardona")))
+                              )) 
+                            
+                            ),
+                        column(6,
+                        infoBox("------------", a("github",href = "https://github.com/jhoniers011/TrabajoTAE1"), width = 6,icon = icon("github", lib = "font-awesome"),subtitle = "hola",color = "black"),
+                  
+                        
+                               infoBox("------", a("Rpubs",href = "https://rpubs.com/allisonpg12/750813"), width = 6,icon = icon("r-project", lib = "font-awesome"),subtitle = "hola",color = "black"))
+                            
+                        
                         )
                         
                         
                         
-                        
-                        
                         ),
+                   
+                        
+                        
+                
+                
             
                 tabItem(tabName = "Aplicacion",
                     
@@ -78,7 +140,7 @@ ui <- dashboardPage(
                         column(12,
         
                             box(title= "Por favor responda las siguientes preguntas",align = "center",width = 12,
-            
+                                
                                 fluidRow(
                                     column(8,
                                         box(title = "1/7", status = "info",solidHeader = TRUE,width = 6,
@@ -280,7 +342,6 @@ server <- function(input, output, ...) {
         
         
         
-        #loadmodel <- load("modelo3.Rdata")
         
       
         

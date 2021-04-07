@@ -42,7 +42,6 @@ De las más de 150 variables contenidas en el total de datos, se hizo una primer
 - Se tomaron aquellos hogares en donde viviera una única familia.
 
 ### Base de datos
-
 Con las consideraciones mencionadas se obtiene una primera base de datos filtrada. Sin embargo, se observan dos inconvenientes principales que debían ser solucionados para evitar futuros obstáculos con el modelo:
 
 - Para variables aparentemente importantes según la literatura, como por ejemplo si el jefe del hogar vive o no con su cónyuge, habían respuestas vacías.
@@ -51,7 +50,7 @@ Con las consideraciones mencionadas se obtiene una primera base de datos filtrad
 - Para el mismo hogar, se tenían dos filas de datos que debían apuntar a la misma predicción, pues se trataban de respuestas dadas por el jefe del hogar y el cónyuge del jefe del hogar.
   - La solución que se planteó fue crear nuevas variables especificando si se trataba del jefe del hogar o del cónyuge, esto para el mismo hogar. Esto ocasionó que se duplicaran la cantidad de variables, pero mantuvo la información relevante para cada familia.
   
-Con lo anterior, se llegó a una tabla final con $74$ variables, que se procedieron a ser analizadas estadísticamente para llevar a cabo una segunda selección. 
+Con lo anterior, se llegó a una tabla final con $74$ variables las cuales fueron analizadas estadísticamente para llevar a cabo una segunda selección. 
 
 ***TENIENDO EN CUENTA LO ANTERIOR, SE CONCLUYÓ QUE EL MODELO ESTARÍA LIMITADO PARA HOGARES DONDE HUBIERA PRESENCIA DE UNA SOLA FAMILIA Y ADICIONALMENTE QUE HUBIERA PRESENCIA DE LOS DOS CÓNYUGES EN EL HOGAR***
 
@@ -798,13 +797,50 @@ hist(datos$Hijos_x, xlab="Número de hijos", ylab="Frecuencia", main="Cantidad d
 ```
 
 
+Finalmente, a modo de resumen, se obtienen los siguientes resultados:
+
+### Exploración de relaciones
+```{r message=FALSE, warning=FALSE}
+library(gmodels)
+library(Hmisc)
+library(corrplot)
+
+kable(round(cor(datos),2))
+
+```
+
+Teniendo en cuenta las relaciones más relevantes alrededor de la variable hijos, se emplea en la tabla anterior, se realiza una descripción más profunda de las mismas, como sigue a continuación
+
+```{r}
+d1 <- data.frame(datos$Hijos_x,datos$Edad_Jefe, datos$Num_cuartos_para_dormir, datos$cantidad_personas, datos$Edad_Conyuge, datos$Padre_vive_Conyuge, datos$Padre_vive_Jefe, datos$Madre_vive_Conyuge, datos$Madre_vive_Jefe, datos$Ingreso_percapita)
+names(d1) = c("Hijos", "Edad Jefe", "Cuartos para dormir", "Cantidad personas", "Edad Cónyuge", "PV Cónyuge", "PV Jefe", "MV Cónyuge","MV Jefe", "Ingreso PÉR")
+co <- round(cor(d1),1)
+corrplot(co, method="number", type="upper")
+```
+
+
+Con lo anterior, se plantea de la misma manera realizar algunas gráficas que muestren el comportamiento de las variables que tienen relación con la variable hijos
+
+```{r}
+boxplot(datos$Padre_vive_Conyuge, datos$Hijos_x, col ="violet")
+boxplot(datos$Padre_vive_Jefe, datos$Hijos_x, col="springgreen")
+boxplot(datos$Madre_vive_Conyuge, datos$Hijos_x, col="slateblue1")
+boxplot(datos$Madre_vive_Jefe, datos$Hijos_x, col="yellow3")
+plot(datos$Edad_Jefe, datos$Hijos_x, lty=2)
+plot(datos$Edad_Conyuge, datos$Hijos_x, lty=2)
+plot(datos$Num_cuartos_para_dormir, datos$Hijos_x, lty=2)
+plot(datos$Ingreso_percapita, datos$Hijos_x, lty=2)
+```
+
+Con el análisis hecho, se procede desarrollar el modelo de predicción.
+
 ## Modelo propuesto
-Debido a la conformación del equipo de trabajo, donde únicamente dos integrantes poseían el conocimiento suficiente para la realización de otro tipo de modelos que podrían ser o no más eficaces para el reto planteado, dada su naturaleza de ______, como el método de los bosques aleatorios o una regresión Poisson; se escoge el método de los **K-Nearest Neighbors (KNN)** con el fin de lograr un entendimiento total del modelo y de su estructura para todo el grupo.
+Debido a la conformación del equipo de trabajo, se selecciona el método de los **K-Nearest Neighbors (KNN)** con el fin de lograr un entendimiento total del modelo y de su estructura ya que, únicamente dos integrantes poseen el conocimiento suficiente para la realización de otros tipos de modelos que podrían ser o no más eficaces para el reto planteado, dada su naturaleza de ______, como el método de los bosques aleatorios o una regresión Poisson.
 
 Aunque este método no es el más eficaz debido a las exigencias computacionales que demanda, se probaron 2 modelos diferentes obtenidos a partir de distintos enfoques, como se explica a continuación:
 
 ### Modelo 1:
-Luego de hacer el tratamiento de los datos como se planteaó anteriormente, teniendo en cuenta las variables escogidas, se hace un pequeño filtrado para eliminar las que no poseían relevancia o no aportaban demasiada información, como el directorio del hogar y el ID del jefe o cónyuge del hogar, pues estas se encontraban de manera implícita dentro de otras. Por ejemplo, el tipo de documento de identidad (ID), ya que se podía deducir con la edad de la persona.
+Luego de hacer el tratamiento de los datos como se planteó anteriormente, se hace un pequeño filtrado con el fin de eliminar las variables poco relevantes o no aportatantes en información, como el directorio del hogar, el ID del jefe y cónyuge del hogar, y la variable duplicada de hijos como se explicó anteriormente.
 
 ```{r eval=FALSE}
 datos <- read.csv("Datos_final.csv", header = TRUE, sep = ",") ## Cargando los datos
@@ -815,7 +851,7 @@ datos <- datos[, -c(4, 6, 25, 47, 49)]
 
 Con lo anterior, se obtiene una tabla de datos con la variable respuesta como la primera columna, la cual corresponde al número de hijos por hogar.
 
-Se procede entonces a realizar la estandarización de las variables para remover las unidaes, debido a que como se trabajó con el método de los **K-Nearest Neighbors (KNN)**, este es suceptible a ellas.
+Se procede entonces a realizar la estandarización de las variables para remover las unidades, debido a que el método de los **K-Nearest Neighbors (KNN)** es suceptible a ellas.
 
 ```{r eval=FALSE}
 estandar <- function(x){
@@ -824,7 +860,7 @@ estandar <- function(x){
 entradas <- as.data.frame(lapply(datos[,2:69], estandar)) ## estandarizar las variables de entrada
 ```
 
-Luego, del total de datos, se escoge un porcentaje para entrenamiento y un porcentaje para prueba. Con el fin de evitar overfitting o sobreentrenamiento para el modelo, se decide usar el 90% y el 10% de los datos para cada caso, respectivamente. Por último, se organiza cada una de las particiones con la variable respuesta, para proceder con el entrenamiento del modelo.
+Luego, del total de datos, se selecciona un porcentaje para entrenamiento y un porcentaje para prueba. Con el fin de evitar overfitting o sobreentrenamiento en el modelo, se decide usar el 90%  y el 10% de los datos para cada caso, respectivamente. Por último, se organiza cada una de las particiones con la variable respuesta, para proceder con el entrenamiento del modelo.
 
 ```{r eval=FALSE}
 set.seed(123) ## Se fija la semilla
@@ -836,7 +872,7 @@ Hijos_prueba <- datos[-aleatorio, 1] ## Se coge la fila 1 que es la variable res
 datos_entre <- cbind(Hijos, entradas_entre) ## Se concatenan la variable y los datos para obtener el conjunto completo de datos de entrenamiento
 ```
 
-Por último, se hace la selección de las variables y el entrenamiento del modelo usando el método de correlación cruzada con ayuda de las funciones **rfe***(Control de eliminación recursiva de variables)* y **rfe***(Eliminación recursiva de características)*.
+Por último, se hace la selección de las variables y el entrenamiento del modelo usando el método de validación cruzada con ayuda de las funciones **rfeControl***(Control de eliminación recursiva de variables)* y **rfe***(Eliminación recursiva de características)*.
 
 ```{r eval=FALSE}
 set.seed(123)
@@ -857,13 +893,24 @@ model <- rfe(Hijos ~ ., data = datos_entre, ## Modelo saturado
 ```
 
 ### Modelo 2:
-### Escogencia del modelo
+El modelo 2 toma el mismo procedimiento de desarrollo que el modelo 1. Sin embargo, a diferencia del modelo 1, se contaba inicialmente con una base de datos con problemas estructurales debido a lo siguiente:
+  - La base de datos contenía variables cualitativas dificilmente categorizables
+  - Por hogar se contaba mínimamente con dos datos, uno referente al jefe del hogar y otro a su cónyuge, lo cual significaba que para dos unidades muestreales "diferentes" se obtenía el mismo resultado.
+  - Se seleccionaron las variables de manera arbitraria en la base de datos y posteriormente para el entrenamiento del modelo, se seleccionaron nuevamente otras variables sin argumentos estadísticos sólidos, tales como: 
 
-Para la escogencia del modelo se tuvo en cuenta, más allá de los resultados obtenidos en la predicción, todo el proceso de selección, filtrado de datos y entrenamiento del mismo según las variables significativas. Se observaron entonces los siguientes comportamientos:
+### Elección del modelo
+Para la elección del modelo se tuvo en cuenta, más allá de los resultados obtenidos en la predicción y las métricas de evaluación, todo el proceso de selección, filtrado de datos y entrenamiento del modelo según las variables significativas. Se observaron entonces los siguientes comportamientos:
 
-- Para el modelo 2, la base de datos usada en el entrenamiento no estaba bien fundamentada, debido a que:
-  - las variables finales que se usaron en el entrenamiento del modelo no estaban fundamentadas en criterios matemáticos, lo que daba paso a una selección final que podía no aportar con información relevante, causando predicciones poco precisas según los datos suministrados.
-  -
+- Para el modelo 2, la base de datos usada en el entrenamiento presentaba inconsistencias, debido a que:
+  - las variables finales que se usaron en el entrenamiento del modelo no estaban fundamentadas en criterios matemáticos, lo que daba paso a una selección final que podía no aportar información relevante, causando predicciones poco precisas según los datos suministrados.
+  - Los datos por hogar se encontraban repetidos, en algunos casos más de una vez y por lo tanto, causaba errores en la predicción debido al mal entrenamiento del modelo.
+  - Hubo una reducción drástica de datos de unidades muestrales debido a la eliminación inicial imprecisa de variables.
+
+- Para el modelo 1, se contaba con una base de datos sólida, con buen filtrado y gran cantidad de observaciones. Además, se emplearon métodos estadísticos para seleccionar las variables importantes del modelo y los vecinos ideales para la predicción. 
+
+Ambos modelos presentaron una tasa de error cercana al 20%, por lo cual esta medida no fue un factor determinante para la elección.
+
+Teniendo en cuenta lo anterior, se selecciona la modelo 1 debido a que cuenta con explicaciones estadísticas determinantes y explicativas. Además de que presenta una información menos empírica para las variables del modelo y los vecinos del mismo.
 
 ## Resultados del modelo
 

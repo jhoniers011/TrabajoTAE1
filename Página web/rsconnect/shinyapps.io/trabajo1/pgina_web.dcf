@@ -1,0 +1,10 @@
+name: pgina_web
+title:
+username:
+account: trabajo1
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3921431
+bundleId: 4440272
+url: https://trabajo1.shinyapps.io/pgina_web/
+when: 1617769401.69402

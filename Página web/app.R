@@ -155,11 +155,7 @@ a:active {
                                                     min = 15, max = 100, value = 48
                                         )),
                                         
-                                        box(title = "3/7", status = "info",solidHeader = TRUE,width = 6,
-                                        numericInput("cant_personas", label = h3("Cantidad de personas del hogar"), value = 4),
-                                        sliderInput("slider_cant_personas","",
-                                                    min = 2, max = 19, value = 4
-                                        )),
+                                        
                                         box(title = "4/7", status = "info",solidHeader = TRUE,width = 6,
                                         numericInput("num_cuartos", label = h3("Número de cuartos para dormir"), value = 2),
                                         sliderInput("slider_num_cuartos","",
@@ -172,17 +168,7 @@ a:active {
                                     sliderInput("slider_per_capita","",
                                                 min = 0, max = 95000000, value = 700000
                                     )),
-                                    box(title = "6/7", status = "info",solidHeader = TRUE,width = 4,
-                                        prettyRadioButtons(
-                                            inputId = "vive_madre_jefe",
-                                            label = "Vive la madre del jefe del hogar contigo", 
-                                            choices = c("Si"=1, "No" = 2, "Fallecida" = 3),
-                                            icon = icon("check"),
-                                            inline = TRUE,
-                                            bigger = TRUE, 
-                                            status = "info",
-                                            animation = "jelly"
-                                                        )),
+                                    
                                     box(title = "7/7", status = "info",solidHeader = TRUE,width = 4,
                                         prettyRadioButtons(
                                             inputId = "vive_madre_conyuge",
@@ -224,13 +210,11 @@ a:active {
 server <- function(input, output, ...) {
     
     
-    cant_personas <- reactive(input$cant_personas)
     num_cuartos <- reactive(input$num_cuartos)
     edad_conyuge <- reactive(input$edad_conyuge)
     edad_jefe <- reactive(input$edad_jefe)
     per_capita <- reactive(input$per_capita)
     vive_madre_conyuge <- reactive(input$vive_madre_conyuge)
-    vive_madre_jefe <- reactive(input$vive_madre_jefe)
     
     
     #Observers para la pregunta edad del conyuge
@@ -259,17 +243,7 @@ server <- function(input, output, ...) {
                           value = input$edad_jefe)
     })
     
-    #Observers para la pregunta cantidad de personas
-    observeEvent(input$slider_cant_personas,{
-        
-        updateNumericInput(session = getDefaultReactiveDomain(),"cant_personas",value = input$slider_cant_personas)
-        
-    })
-    
-    observeEvent(input$cant_personas, {
-        updateSliderInput(session = getDefaultReactiveDomain(), "slider_cant_personas",
-                          value = input$cant_personas)
-    })
+   
     
     #Observers para la pregunta num_cuartos
     observeEvent(input$slider_num_cuartos,{
@@ -303,15 +277,14 @@ server <- function(input, output, ...) {
         
         
         datos <- read.csv("Datos_final.csv", header = TRUE, sep = ",") ## Cargando los datos
-        datos <- datos[, c(19,4, 9,29,31,32,49,54)] ## se obtienen solo las 7 variables que interesan, 19 es hijos,hijos ya es la primera columna
+        #Se elimina la 9 -> madre vive jefe, y cantidad de personas -> 32
+        datos <- datos[, c(19,4,29,31,49,54)] ## se obtienen solo las 7 variables que interesan, 19 es hijos,hijos ya es la primera columna
         
         normalize <- function(x){
             return((x - min(x)) / (max(x) - min(x)))
         }
         
-        dat = data.frame(cantidad_personas = (as.numeric(cant_personas())-min(datos$cantidad_personas))/
-                             (max(datos$cantidad_personas)-min(datos$cantidad_personas)),
-                         Num_cuartos_para_dormir = (as.numeric(num_cuartos())-min(datos$Num_cuartos_para_dormir))/
+        dat = data.frame(Num_cuartos_para_dormir = (as.numeric(num_cuartos())-min(datos$Num_cuartos_para_dormir))/
                              (max(datos$Num_cuartos_para_dormir)-min(datos$Num_cuartos_para_dormir)),
                          Edad_Conyuge = (as.numeric(edad_conyuge())-min(datos$Edad_Conyuge))/
                              (max(datos$Edad_Conyuge)-min(datos$Edad_Conyuge)),
@@ -320,9 +293,7 @@ server <- function(input, output, ...) {
                          Ingreso_percapita = (as.numeric(per_capita())-min(datos$Ingreso_percapita))/
                              (max(datos$Ingreso_percapita)-min(datos$Ingreso_percapita)),
                          Madre_vive_Conyuge = (as.numeric(vive_madre_conyuge())-min(datos$Madre_vive_Conyuge))/
-                             (max(datos$Madre_vive_Conyuge)-min(datos$Madre_vive_Conyuge)),   
-                         Madre_vive_Jefe = (as.numeric(vive_madre_jefe())-min(datos$Madre_vive_Jefe))/
-                             (max(datos$Madre_vive_Jefe)-min(datos$Madre_vive_Jefe)))
+                             (max(datos$Madre_vive_Conyuge)-min(datos$Madre_vive_Conyuge)))
         
         
         

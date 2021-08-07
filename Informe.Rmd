@@ -964,8 +964,8 @@ kable(round(cor(datos),2))
 Teniendo en cuenta las relaciones más relevantes alrededor de la variable hijos, se emplea en la tabla anterior, se realiza una descripción más profunda de las mismas, como sigue a continuación:
 
 ```{r}
-d1 <- data.frame(datos$Hijos_x,datos$Edad_Jefe, datos$Num_cuartos_para_dormir, datos$cantidad_personas, datos$Edad_Conyuge, datos$Padre_vive_Conyuge, datos$Padre_vive_Jefe, datos$Madre_vive_Conyuge, datos$Madre_vive_Jefe, datos$Ingreso_percapita)
-names(d1) = c("Hijos", "Edad Jefe", "Cuartos para dormir", "Cantidad personas", "Edad Cónyuge", "PV Cónyuge", "PV Jefe", "MV Cónyuge","MV Jefe", "Ingreso PÉR")
+d1 <- data.frame(datos$Hijos_x,datos$Edad_Jefe, datos$Num_cuartos_para_dormir, datos$Edad_Conyuge, datos$Padre_vive_Conyuge, datos$Padre_vive_Jefe, datos$Madre_vive_Conyuge, datos$Madre_vive_Jefe, datos$Ingreso_percapita)
+names(d1) = c("Hijos", "Edad Jefe", "Cuartos para dormir", "Edad Cónyuge", "PV Cónyuge", "PV Jefe", "MV Cónyuge","MV Jefe", "Ingreso PÉR")
 co <- round(cor(d1),1)
 corrplot(co, method="number", type="upper",number.cex = 0.8)
 ```
@@ -999,6 +999,7 @@ datos <- read.csv("Datos/Datos_final.csv", header = TRUE, sep = ",") ## Cargando
 datos <- datos[, -c(1, 2, 47, 64)] ## Eliminando el directorio, el ID del jefe y conyugue e hijos_y, que es igual a la variable respuesta hijos
 datos <- datos[, c(17, 1:16, 18:74)] ## Ordenando la base de datos para que hijos sea la primer columna
 datos <- datos[, -c(4, 6, 25, 47, 49)]
+datos <- datos[, -c(27)]
 ```
 
 Con lo anterior, se obtiene una tabla de datos con la variable respuesta como la primera columna, la cual corresponde al número de hijos por hogar.
@@ -1009,7 +1010,7 @@ Se procede entonces a realizar la estandarización de las variables para remover
 estandar <- function(x){
   return((x - min(x)) / (max(x) - min(x)))
 }
-entradas <- as.data.frame(lapply(datos[,2:69], estandar)) ## estandarizar las variables de entrada
+entradas <- as.data.frame(lapply(datos[,2:68], estandar)) ## estandarizar las variables de entrada
 ```
 
 Luego, del total de datos, se selecciona un porcentaje para entrenamiento y un porcentaje para prueba. Con el fin de evitar overfitting o sobreentrenamiento en el modelo, se decide usar el 90%  y el 10% de los datos para cada caso, respectivamente. Por último, se organiza cada una de las particiones con la variable respuesta, para proceder con el entrenamiento del modelo.

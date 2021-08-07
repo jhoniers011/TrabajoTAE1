@@ -439,6 +439,7 @@ Estado_civil_jefe_table <- table(datos$Estado_civil_Jefe)
 Estado_civil_jefe <- barplot(Estado_civil_jefe_table, col = c("bisque","aquamarine","coral"), main = "Estado civil Jefe/Cónyuge",ylim = c(0,30000),names = c('No casado(a) y vive con la \npareja hace menos de dos años','No casado(a) y vive con \nla pareja hace más de dos años','Casado' ))
 text(Estado_civil_jefe,Estado_civil_jefe_table+2000,labels = Estado_civil_jefe_table)
 ```
+
 **PADRE_VIVE_Jefe/PADRE_VIVE_Cónyuge**
 ```{r}
 par(mfrow=c(1,2))
@@ -630,7 +631,7 @@ legend("topright",legend= c('1. Bloque, ladrillo, piedra, madera pulida','2. Ado
 **Material_Piso**
 ```{r}
 Material_piso_table <- table(datos$Material_piso)
-Material_piso <- barplot(Material_piso_table, col = 'black', main = "Material piso del hogar",ylim = c(0,25000),cex.names = 1)
+Material_piso <- barplot(Material_piso_table, col = 'black', main = "Material piso del hogar",ylim = c(0,25000),cex.names = 1, xlim = c(0,8))
 text(Material_piso,Material_piso_table+1500,labels = Material_piso_table)
 legend("topleft",legend= c('1.Alfombra, tapete','2. Madera pulida','3. Mármol','4. Baldosa, tableta, ladrillo','5. Madera,tabla, tablón','6. Cemento, gravilla','7. Tierra, arena'),xpd = TRUE,cex = 1,inset = c(0.05,0) )
 ```
@@ -757,7 +758,7 @@ text(Estudia_conyuge,Estudia_conyuge_table+2000,labels = Estudia_conyuge_table)
 par(mfrow=c(1,2))
 #Jefe
 Nivel_educativo_jefe_table <- table(datos$Nivel_educativo_Jefe)
-Nivel_educativo_jefe <- barplot(Nivel_educativo_jefe_table, col = "lightsteelblue1", main = "Nivel educativo Jefe",ylim = c(0,22000),cex.names = 0.7)
+Nivel_educativo_jefe <- barplot(Nivel_educativo_jefe_table, col = "lightsteelblue1", main = "Nivel educativo Jefe",ylim = c(0,22000),cex.names = 0.7, xlim = c(1,15))
 text(Nivel_educativo_jefe,Nivel_educativo_jefe_table+2000,labels = Nivel_educativo_jefe_table,srt=90)
 legend("topright",legend= c('1.Ninguno','2.Preescolar','3.Básica primaria','4.Básica secundaria','5.Media','6.Técnico sin título','7.Técnico con título'),xpd = TRUE,cex = 0.8,inset = c(-0.1,0.05) )
 #Conyuge
@@ -851,6 +852,7 @@ Recibe_ingreso_bienes_conyuge <- barplot(Recibe_ingreso_bienes_conyuge_table, co
 text(Recibe_ingreso_bienes_conyuge,Recibe_ingreso_bienes_conyuge_table+2000,labels = Recibe_ingreso_bienes_conyuge_table)
 ```
 
+De la exploración de las variables cualitativas, se puede observar que existe relación entre algunas variables. Por ejemplo, la variable $Felicidad$ tiene una estrecha relación con las variables $Satisfacción vida$, $Satisfacción económica$, $Satisfacción salud$, $Satisfacción trabajo$ y esto se explica en que la calidad de vida de las personas está determinada en gran medida por factores como salud, economía, trabajo, entre otros [4]. 
 
 ### Descripción de variables cuantitativas
 De las $70$ variables de la base de datos, se tienen $9$ variables cuantitativas, y se realiza el siguiente análisis exploratorio para cada una de ellas
@@ -958,7 +960,6 @@ library(corrplot)
 library(knitr)
 
 kable(round(cor(datos),2))
-
 ```
 
 Teniendo en cuenta las relaciones más relevantes alrededor de la variable hijos, se emplea en la tabla anterior, se realiza una descripción más profunda de las mismas, como sigue a continuación:
@@ -992,7 +993,7 @@ Debido a la conformación del equipo de trabajo, se selecciona el método de los
 Aunque este método no es el más eficaz debido a las exigencias computacionales que demanda, se probaron 2 modelos diferentes obtenidos a partir de distintos enfoques, como se explica a continuación:
 
 ### Modelo 1:
-Luego de hacer el tratamiento de los datos como se planteó anteriormente, se hace un pequeño filtrado con el fin de eliminar las variables poco relevantes o no aportantes en información, como el directorio del hogar, el ID del jefe y cónyuge del hogar, y la variable duplicada de hijos como se explicó anteriormente.
+Luego de hacer el tratamiento de los datos como se planteó anteriormente, se hace un pequeño filtrado con el fin de eliminar las variables poco relevantes o no aportantes en información, como el directorio del hogar, el ID del jefe y cónyuge del hogar, y la variable duplicada de hijos como se explicó anteriormente. Adicionalmente, se excluye la variable "Cantidad de personas" debido a que tiene un efecto circular respecto a la variable respuesta, es decir, el número de hijos puede depender de la cantidad de personas pero a su vez, la cantidad de personas depende del número de hijos; por lo cual, se decide excluir esta variable.
 
 ```{r eval=FALSE}
 datos <- read.csv("Datos/Datos_final.csv", header = TRUE, sep = ",") ## Cargando los datos
@@ -1144,6 +1145,7 @@ kable(t(metrica), caption = "MÉTRICAS DE DESEMPEÑO")
   En dicha matriz, se evidencia que el modelo predice en buena medida los resultados esperados de la variable respuesta hijos. 
 
 ## Conclusiones
+- Se evidencia 
 - Antes de apresurarse en la selección de un modelo para la solución de algún problema específico donde se necesite predecir, es de vital importancia tener una base de datos muy bien estructurada, con variables debidamente categorizadas, con respuestas acordes a cada una de las etiquetas y que aporten de manera significativa al modelo. Para ello, es necesario tener conocimientos sobre el uso de herramientas/comandos que ayuden con esta tarea, pues es el paso preliminar más importante cuando se trata de aprendizaje estadístico.
 - Se observó en varias ocasiones que la correlación entre cada una de las variables y la variable respuesta podría arrojar resultados totalmente inesperados. Esto debido a que, según la literatura y siguiendo con un razonamiento personal frente a las variables consideradas relevantes, preguntas como el estrato socioeconómico o el estado de salud del jefe del hogar podían influir en gran medida con la cantidad de hijos, pero al hacer los respectivos análisis, tanto con la validación cruzada del modelo como en el análisis de correlación, no se obtenían tan buenos resultados con esas variables; he allí la importancia de este tipo de análisis para un buen entrenamiento.
 - Como en cualquier búsqueda de soluciones a un problema, es de vital importancia conocer las características más importantes de este para poder plantear soluciones que sean óptimas. Por esta razón, aunque se mencionaron modelos más apropiados para el reto planteado, como por ejemplo el de bosques aleatorios, se hacía necesario también tener conocimientos técnicos básicos para el planteamiento del mismo, razón por la cual se descartó, para evitar confusiones y sobrecargas de trabajo a algunos miembros del equipo. Sin embargo, esta apreciación sirvió como sensibilización para tener presente que aunque el abanico de opciones es muy amplio, primero hay que conocerlo para poder tenerlo en cuenta como una alternativa.
@@ -1157,5 +1159,7 @@ La aplicación web desarrollada para el modelo interactivo se puede encontrar aq
 **[2].** E.P. ROBAYO ESCOBAR, “TIPOLOGÍAS DEL HOGAR EN COLOMBIA (2000-2015): CARACTERÍSTICAS SOCIODEMOGRÁFICAS DE LAS MUJERES”, tesis, facultad de ciencias sociales y humanas, maestría en estudios de población, universidad externado de colombia, agosto  2019.
 
 **[3].** J.S. ROMERO MORENO, “UN ACERCAMIENTO A LOS MODELOS ARIMAX Y LINEAL DINÁMICO PARA ESTIMAR NATALIDAD EN COLOMBIA EN EL PERIODO ENTRE ENERO 2011 A DICIEMBRE 2017”, trabajo de grado, departamento de ciencias básicas, fundación universitaria los libertadores, Bogotá d.c, Colombia, 2019
+
+**[4].** J. AGUILAR, J. ÁLVAREZ and J. LORENZO, "FACTORES QUE DETERMINAN LA CALIDAD DE VIDA DE LAS PERSONAS MAYORES", International Journal of Developmental and Educational Psychology. pp. 164-166, 2011.
 
 </div>
